@@ -33,4 +33,15 @@
     <string name="blood_group">Blood Group</string>
     <string name="employee_salary">Employee Salary</string>
     <string name="save">Save</string>
+    <string name="welcome">Welcome</string>
+    <string name="phone_number">phone number</string>
+    <string name="passwords">Passwords</string>
+    <string name="login">Login</string>
+
+    <string name="punch_in">Punch In</string>
+    <string name="punch_out">punch_out</string>
+    <string name="date">DATE</string>
+    <string name="attmark">attendance Marked</string>
+    <string name="puncin">punchout not done!</string>
+    <string name="pucout">punchin not done!</string>
 </resources>

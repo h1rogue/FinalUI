@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="35dp"
+    android:layout_height="35dp"
+    android:layout_gravity="center_vertical|center_horizontal"
+    android:background="@drawable/subs_day_selected"
+    android:focusableInTouchMode="false"
+    android:focusable="false"
+    android:gravity="center"
+    android:minHeight="35dp"
+    android:text="00"
+    android:textAlignment="center"
+    android:textAppearance="@android:style/TextAppearance.Medium" />
