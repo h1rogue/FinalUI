@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_attendance"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/attendance" />
+        <item
+            android:id="@+id/nav_rider_app"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/ride" />
+        <item
+            android:id="@+id/nav_all_rides"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="@string/all_rides" />
+        <item
+            android:id="@+id/nav_salary"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/salary_details" />
+        <item
+            android:id="@+id/nav_taks_assigned"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="@string/tasks_and_assignment" />
+        <item
+            android:id="@+id/nav_employeeInfo"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/user_information" />
+            <item
+                android:id="@+id/nav_comp_details"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/company_details" />
+            <item
+                android:id="@+id/nav_contact"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/contact" />
+    </group>
+</menu>
