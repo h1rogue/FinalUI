@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".CompanyDetailActivity">
+
+    <ScrollView
+        android:id="@+id/scrollviews"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center">
+
+        <androidx.cardview.widget.CardView
+            android:layout_margin="6dp"
+            android:padding="8dp"
+            android:id="@+id/card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:cardCornerRadius="6dp"
+            app:cardElevation="5dp">
+
+            <LinearLayout
+                android:id="@+id/lin"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/deskneedslog" />
+
+                <TextView
+                    android:id="@+id/billing"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:text="@string/billing_details"
+                    android:textAllCaps="true"
+                    android:textColor="#000000"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/linele"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp">
+
+                    <TextView
+                        android:id="@+id/GST"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/gstin"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_marginStart="1dp"
+                        android:id="@+id/GSTno"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/_18aaxcs9739a1zo"
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="2dp"
+                    android:id="@+id/linele2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp">
+
+                    <TextView
+                        android:id="@+id/email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/emails"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_marginStart="1dp"
+
+                        android:id="@+id/emailid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/contact_deskneed_com"
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="2dp"
+                    android:id="@+id/linele3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp">
+
+                    <TextView
+                        android:id="@+id/phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/phone_numbera"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_marginStart="1dp"
+
+                        android:id="@+id/phoneno"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/_91_9954_683_549"
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="2dp"
+                    android:id="@+id/linele6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp">
+
+                    <TextView
+                        android:layout_gravity=""
+                        android:id="@+id/address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/addresss"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_marginStart="1dp"
+
+                        android:id="@+id/gstno"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="RGB Road, Ganeshguri, Ghy - 781006"
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="2dp"
+                    android:id="@+id/linele4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp">
+
+                    <TextView
+                        android:id="@+id/cin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cin"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_marginStart="1dp"
+
+                        android:id="@+id/cinno"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/u74999mp2016ptc041773"
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="2dp"
+                    android:id="@+id/linele5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp">
+
+                    <TextView
+                        android:id="@+id/Dipp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/dipps"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_marginStart="1dp"
+
+                        android:id="@+id/dippno"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/dipp1842"
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_marginTop="2dp"
+                    android:id="@+id/linele7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp">
+
+                    <TextView
+                        android:id="@+id/msme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/msme_uam_no"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_marginStart="1dp"
+
+                        android:id="@+id/msmeno"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/as03d0001520"
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"/>
+                <TextView
+                    android:id="@+id/bank_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:text="@string/company_bank_details"
+                    android:textColor="#000000"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/linele8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp">
+
+                    <TextView
+                        android:id="@+id/acc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/account_no"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_marginStart="1dp"
+
+                        android:id="@+id/accno"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/_39010200000238"
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="2dp"
+                    android:id="@+id/linele9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp">
+
+                    <TextView
+                        android:id="@+id/aifs"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ifsc"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_marginStart="1dp"
+                        android:id="@+id/ifscno"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/barb0ambari"
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="2dp"
+                    android:id="@+id/linele10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp">
+
+                    <TextView
+                        android:id="@+id/bankn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/bank_name"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_marginStart="1dp"
+
+                        android:id="@+id/bankno"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/bank_of_baroda"
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="2dp"
+                    android:id="@+id/linele11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="horizontal"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp">
+
+                    <TextView
+                        android:id="@+id/branch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/branch"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_marginStart="1dp"
+                        android:id="@+id/branchname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ambari"
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </ScrollView>
+</LinearLayout>

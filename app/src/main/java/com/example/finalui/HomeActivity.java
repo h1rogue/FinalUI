@@ -85,7 +85,8 @@ public class HomeActivity extends AppCompatActivity
             startActivity(intent);
         }
         else if (id == R.id.nav_comp_details) {
-            //Company Details
+            Intent intent = new Intent(this,CompanyDetailActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_contact) {
             Intent intent = new Intent(this,CompanyContactActivity.class);
             startActivity(intent);
