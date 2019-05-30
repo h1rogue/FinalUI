@@ -12,16 +12,22 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private TextView emipd,empname,empdes;
+    private Button emdet,punchin,punchout,report,compy;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Home");
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -29,6 +35,40 @@ public class HomeActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        emipd=findViewById(R.id.textView5);
+        empname=findViewById(R.id.textView6);
+        empdes=findViewById(R.id.textView7);
+        punchin=findViewById(R.id.button7);
+        punchout=findViewById(R.id.button9);
+        report=findViewById(R.id.button10);
+        emdet=findViewById(R.id.button5);
+        compy=findViewById(R.id.compdet);
+
+        emdet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this,EmployeeDetActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        report.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this,AttendanceActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        compy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this,CompanyDetailActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

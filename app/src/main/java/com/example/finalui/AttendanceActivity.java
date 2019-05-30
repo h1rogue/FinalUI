@@ -12,5 +12,6 @@ public class AttendanceActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attendance);
+        getSupportActionBar().setTitle("Attendance");
     }
 }

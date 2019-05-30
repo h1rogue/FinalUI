@@ -21,7 +21,7 @@ public class EmployeeDetActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employee_det);
-
+        getSupportActionBar().setTitle("Employee Details");
 
         layout = findViewById(R.id.linearlay2);
         button = findViewById(R.id.button);

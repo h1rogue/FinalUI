@@ -71,4 +71,16 @@
     <string name="branch">Branch : </string>
     <string name="ambari">Ambari</string>
     <string name="addresss">Address : </string>
+    <string name="report">Report</string>
+    <string name="designation">Designation</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="ride_details">Ride Details</string>
+    <string name="pause">pause</string>
+    <string name="resume">resume</string>
+    <string name="last_ride">last ride</string>
+    <string name="trips">trips</string>
+    <string name="distance_travelled">Distance travelled</string>
+    <string name="duration">Duration</string>
+    <string name="company_info">Company Info</string>
 </resources>

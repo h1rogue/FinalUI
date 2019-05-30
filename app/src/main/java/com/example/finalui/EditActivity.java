@@ -14,6 +14,7 @@ public class EditActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
+        getSupportActionBar().setTitle("Edit");
         //Declare all edit text
 
         savebutton=findViewById(R.id.savebutton);
