@@ -6,16 +6,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".EditActivity">
-
-    <Button
-        android:id="@+id/savebutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/save"
-        android:textSize="18sp" />
+        <Button
+            android:id="@+id/savebutton"
+            android:layout_width="71dp"
+            android:layout_height="40dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="@string/save"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:id="@+id/scrollableedit"
@@ -74,7 +75,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="5dp"
-                android:paddingLeft="5dp"
                 android:paddingEnd="5dp"
                 android:tag="2"
                 android:text="@string/employee_name"
@@ -88,7 +88,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:paddingStart="5dp"
-                android:paddingLeft="5dp"
                 android:paddingEnd="5dp"
                 android:text="@string/date_of_birth"
                 android:textSize="20sp" />
@@ -98,7 +97,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="5dp"
-                android:paddingLeft="5dp"
                 android:paddingEnd="5dp"
                 android:tag="3"
                 android:text="@string/date_of_birth"
@@ -131,7 +129,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:paddingStart="5dp"
-                android:paddingLeft="5dp"
                 android:paddingEnd="5dp"
                 android:text="@string/contact"
                 android:textSize="20sp" />

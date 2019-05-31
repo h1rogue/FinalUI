@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 public class EmployeeDetActivity extends AppCompatActivity {
 
-    private Button button;
+    private Button button,changepass;
     public static final int REQUEST_CODE=123;
     private LinearLayout layout;
     private TextView eid,ename,eadd,eblood,dob,sal,contact;
@@ -33,6 +33,7 @@ public class EmployeeDetActivity extends AppCompatActivity {
         dob=findViewById(R.id.emplyee_dob);
         sal=findViewById(R.id.salary);
         contact=findViewById(R.id.emplyee_contact);
+        changepass=findViewById(R.id.button4);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,6 +46,15 @@ public class EmployeeDetActivity extends AppCompatActivity {
                 intent.putExtra("EBLOOD",eblood.getText().toString().trim());
                 intent.putExtra("DOB",dob.getText().toString().trim());
                 startActivityForResult(intent,REQUEST_CODE);
+            }
+        });
+
+
+        changepass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EmployeeDetActivity.this,ChagePawwordActivity.class);
+                startActivity(intent);
             }
         });
     }

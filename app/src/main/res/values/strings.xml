@@ -83,4 +83,11 @@
     <string name="distance_travelled">Distance travelled</string>
     <string name="duration">Duration</string>
     <string name="company_info">Company Info</string>
+    <string name="attendance_status">Attendance Status</string>
+    <string name="change_password">Change Password</string>
+    <string name="enter_phone_number">Enter Phone Number</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="confirm">CONFIRM</string>
+    <string name="date_picker">Date Picker</string>
 </resources>

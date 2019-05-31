@@ -12,4 +12,5 @@ public class CompanyDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_company_detail);
         getSupportActionBar().setTitle("Company details");
     }
+
 }
