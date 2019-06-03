@@ -6,23 +6,23 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/myhome"
             android:title="@string/menu_home" />
         <item
             android:id="@+id/nav_attendance"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/atten"
             android:title="@string/attendance" />
         <item
             android:id="@+id/nav_rider_app"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/bike"
             android:title="@string/ride" />
         <item
             android:id="@+id/nav_all_rides"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/all_rides"
             android:title="@string/all_rides" />
         <item
             android:id="@+id/nav_salary"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/money"
             android:title="@string/salary_details" />
         <item
             android:id="@+id/nav_taks_assigned"
@@ -30,7 +30,7 @@
             android:title="@string/tasks_and_assignment" />
         <item
             android:id="@+id/nav_employeeInfo"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/userinf"
             android:title="@string/user_information" />
             <item
                 android:id="@+id/nav_comp_details"
