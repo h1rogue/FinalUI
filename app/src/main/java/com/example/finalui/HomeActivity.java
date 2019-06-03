@@ -116,7 +116,8 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_all_rides) {
             //List of rides
         }else if(id == R.id.nav_salary){
-            // Salary details
+           Intent intent = new Intent(getApplicationContext(),SalaryDetailsActivity.class);
+           startActivity(intent);
         }else if(id == R.id.nav_taks_assigned){
             // tasks assigned
         }else if(id == R.id.nav_employeeInfo){

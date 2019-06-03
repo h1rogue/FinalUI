@@ -90,4 +90,9 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="confirm">CONFIRM</string>
     <string name="date_picker">Date Picker</string>
+    <string name="september">september</string>
+    <string name="rs_12000">rs_12000</string>
+    <string name="paid">PAID</string>
+    <string name="_000000">000000</string>
+    <string name="present_salary">Present Salary</string>
 </resources>

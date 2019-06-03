@@ -36,6 +36,7 @@ public class LoginActivity extends AppCompatActivity implements VvVolleyInterfac
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("loading...");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setCanceledOnTouchOutside(false);
         generateRandomString();
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,11 +75,12 @@ public class LoginActivity extends AppCompatActivity implements VvVolleyInterfac
                 Toast.makeText(LoginActivity.this, "Invalid Phone or password", Toast.LENGTH_LONG).show();
             }else
             {
-                progressDialog.dismiss();
+
                 Log.d("Token","found");
                 ApplicationVariable.ACCOUNT_DATA.token = jsonObject.getString("token");
                 Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
                 startActivity(intent);
+                progressDialog.dismiss();
             }
         } catch (JSONException e) {
             e.printStackTrace();

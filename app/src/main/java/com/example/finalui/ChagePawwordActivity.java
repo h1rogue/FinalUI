@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.android.material.snackbar.Snackbar;
+
 public class ChagePawwordActivity extends AppCompatActivity {
 private EditText pernumber,perpassw,perconfirmpass;
 private Button confbutt;
@@ -31,10 +33,11 @@ private Button confbutt;
 
     private void confirmPassword() {
         if(!perpassw.getText().toString().trim().equals(perconfirmpass.getText().toString().trim())){
-
+            perconfirmpass.setError("wrong password");
         }else
         {
-            //Do What We Have to Do
+            //Implement what to do on password change
+            Snackbar.make(findViewById(android.R.id.content),"Password Changed successfully!", Snackbar.LENGTH_SHORT).setDuration(2000).show();
         }
     }
 
