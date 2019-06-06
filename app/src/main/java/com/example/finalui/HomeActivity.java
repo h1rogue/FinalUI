@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
+
+import com.example.finalui.Activities.TaskActivity;
 import com.google.android.material.navigation.NavigationView;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -28,6 +30,7 @@ public class HomeActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Home");
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -99,8 +102,6 @@ public class HomeActivity extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
-
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -119,7 +120,8 @@ public class HomeActivity extends AppCompatActivity
            Intent intent = new Intent(getApplicationContext(),SalaryDetailsActivity.class);
            startActivity(intent);
         }else if(id == R.id.nav_taks_assigned){
-            // tasks assigned
+           Intent intent = new Intent(getApplicationContext(), TaskActivity.class);
+           startActivity(intent);
         }else if(id == R.id.nav_employeeInfo){
             // Employee details
             Intent intent = new Intent(getApplicationContext(),EmployeeDetActivity.class);

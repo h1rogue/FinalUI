@@ -15,7 +15,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SalaryDetailsActivity"></activity>
+        <activity android:name=".SalaryDetailsActivity"/>
+        <activity android:name=".Activities.AddUpdateActivity"/>
+        <activity android:name=".Activities.DetailSctivity"/>
+        <activity android:name=".Activities.TaskActivity"/>
         <activity android:name=".ChagePawwordActivity" />
         <activity android:name=".CompanyDetailActivity" />
         <activity android:name=".AttendanceActivity" />
