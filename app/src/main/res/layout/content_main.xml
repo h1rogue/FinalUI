@@ -120,7 +120,7 @@
             app:layout_constraintBottom_toBottomOf="parent">
 
             <Button
-                android:id="@+id/button11"
+                android:id="@+id/start1"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -130,27 +130,27 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/button12"
+                android:id="@+id/pause"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/pause"
-                app:layout_constraintStart_toEndOf="@+id/button11"
+                app:layout_constraintStart_toEndOf="@+id/start1"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/button13"
+                android:id="@+id/resume"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="5dp"
                 android:text="@string/resume"
-                app:layout_constraintEnd_toStartOf="@+id/button14"
+                app:layout_constraintEnd_toStartOf="@+id/stop"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/button14"
+                android:id="@+id/stop"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -160,14 +160,14 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/button15"
+                android:id="@+id/trips"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/trips"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button11" />
+                app:layout_constraintTop_toBottomOf="@+id/start1" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="379dp"
@@ -178,7 +178,7 @@
                 app:cardCornerRadius="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button15">
+                app:layout_constraintTop_toBottomOf="@+id/trips">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -205,6 +205,16 @@
                         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
                     <TextView
+                        android:id="@+id/dist11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
+                        android:text="0.00"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+                    <TextView
                         android:id="@+id/textView14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -215,6 +225,19 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+                    <Chronometer
+                        android:id="@+id/dura11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
