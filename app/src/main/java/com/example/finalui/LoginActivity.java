@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -30,6 +31,15 @@ public class LoginActivity extends AppCompatActivity implements VvVolleyInterfac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("YYY",MODE_PRIVATE);
+        String toka = sharedPreferences.getString("toka",null);
+        if(toka!=null){
+            Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
         phone = findViewById(R.id.phone);
         password = findViewById(R.id.password);
         login = findViewById(R.id.btn_login);
@@ -78,6 +88,11 @@ public class LoginActivity extends AppCompatActivity implements VvVolleyInterfac
 
                 Log.d("Token","found");
                 ApplicationVariable.ACCOUNT_DATA.token = jsonObject.getString("token");
+                //Sharedpref
+                SharedPreferences preferences = getApplicationContext().getSharedPreferences("YYY",MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("toka",ApplicationVariable.ACCOUNT_DATA.token);
+                editor.apply();
                 Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
                 startActivity(intent);
                 progressDialog.dismiss();
