@@ -61,10 +61,10 @@ public class Details extends AppCompatActivity {
             Toast.makeText(this, "Please give a name of the Trip!", Toast.LENGTH_SHORT).show();
         else {
             db.insertTripData(name.getText().toString(), dis, dura);
-            for(LatLng latLng : MapsActivity.latLngList)
-            {
-                Log.i("HHH", latLng.latitude +"  "+ latLng.longitude);
-            }
+//            for(LatLng latLng : MapsActivity.latLngList)
+//            {
+//                Log.i("HHH", latLng.latitude +"  "+ latLng.longitude);
+//            }
 //            Intent i = new Intent(Details.this, Trips.class);
 //            startActivity(i);
             Toast.makeText(this, "Trip saved!", Toast.LENGTH_LONG).show();
