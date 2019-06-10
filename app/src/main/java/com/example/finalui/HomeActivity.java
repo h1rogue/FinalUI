@@ -273,4 +273,9 @@ public class HomeActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    public void RideAppOpen(View view) {
+        Intent intent = new Intent(getApplicationContext(), MapsActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(intent);
+    }
 }

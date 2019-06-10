@@ -20,7 +20,7 @@ public class SalaryDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_salary_details);
 
         // get the listview
-        expListView = (ExpandableListView) findViewById(R.id.expandabels);
+        expListView =  findViewById(R.id.expandabels);
         // preparing list data
         prepareListData();
         listAdapter = new ExpandabelListAdapter(this, listDataHeader, listDataChild);
@@ -33,9 +33,9 @@ public class SalaryDetailsActivity extends AppCompatActivity {
         listDataChild = new HashMap<HeaderModel, List<SalaryModel>>();
 
         // Adding child data
-        HeaderModel january = new HeaderModel(500000,"January");
-        HeaderModel february = new HeaderModel(630000,"February");
-        HeaderModel march = new HeaderModel(350000,"March");
+        HeaderModel january = new HeaderModel(500000,"January",450000);
+        HeaderModel february = new HeaderModel(630000,"February",600000);
+        HeaderModel march = new HeaderModel(350000,"March",300000);
 
         listDataHeader.add(january);
         listDataHeader.add(february);

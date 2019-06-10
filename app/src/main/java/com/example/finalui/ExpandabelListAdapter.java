@@ -66,6 +66,8 @@ public class ExpandabelListAdapter extends BaseExpandableListAdapter {
         HeaderModel headerTitle = (HeaderModel) getGroup(groupPosition);
         String month  = headerTitle.getMonthName();
         int totalamt = headerTitle.getTotalamt();
+        int creamt = headerTitle.getCreditedamt();
+
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -76,10 +78,13 @@ public class ExpandabelListAdapter extends BaseExpandableListAdapter {
                 .findViewById(R.id.lblListHeader);
         TextView totalmonthsum = convertView
                 .findViewById(R.id.totalamtmonth);
+        TextView creditamt = convertView
+                .findViewById(R.id.creditedamt);
 
         lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(month);
         totalmonthsum.setText(""+totalamt);
+        creditamt.setText(""+creamt);
 
         return convertView;
     }
