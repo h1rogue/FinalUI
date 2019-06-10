@@ -1,6 +1,7 @@
 package com.example.finalui.RideTrack;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,9 +15,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.finalui.HomeActivity;
 import com.example.finalui.R;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.finalui.RideTrack.MapsActivity.latLngList;
 
 public class Details extends AppCompatActivity {
     TextView distance1;
@@ -60,11 +64,17 @@ public class Details extends AppCompatActivity {
         if (name.getText().toString().equals(""))
             Toast.makeText(this, "Please give a name of the Trip!", Toast.LENGTH_SHORT).show();
         else {
-            db.insertTripData(name.getText().toString(), dis, dura);
-//            for(LatLng latLng : MapsActivity.latLngList)
-//            {
-//                Log.i("HHH", latLng.latitude +"  "+ latLng.longitude);
-//            }
+            db.insertTripData(name.getText().toString().trim(), dis, dura);
+            RideDetailClass rideDetailClass=new RideDetailClass(name.getText().toString().trim(),
+                    dura,23.4f,dis,latLngList);
+
+            for(LatLng latLng : latLngList)
+                Log.d("AAA", latLng.latitude+","+latLng.longitude);
+
+
+
+            createSharedref(rideDetailClass);
+
 //            Intent i = new Intent(Details.this, Trips.class);
 //            startActivity(i);
             Toast.makeText(this, "Trip saved!", Toast.LENGTH_LONG).show();
@@ -72,6 +82,15 @@ public class Details extends AppCompatActivity {
             Intent i = new Intent(Details.this, HomeActivity.class);
             startActivity(i);
         }
+    }
+
+    private void createSharedref(RideDetailClass riderlist) {
+        SharedPreferences sharedPreferences = getSharedPreferences("GAME",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(riderlist);
+        editor.putString(name.getText().toString().trim(),json);
+        editor.apply();
     }
 }
 

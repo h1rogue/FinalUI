@@ -51,10 +51,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ServiceConfigurationError;
 
 import static com.example.finalui.HomeActivity.dura;
 import static com.example.finalui.HomeActivity.pause1;
@@ -79,6 +77,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     SharedPreferences sharedPreferences;
 
     public static LocationManager manager;
+    public static List<LatLng> latLngList;
 
     LocationRequest mLocationRequest;
     Marker mCurrLocationMarker;
@@ -94,20 +93,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public static String durations = null;
     public static long durationTime, c = 0, i = 0,c1=0;
     public static int findur = 0, findur1 = 0;
-    public static MarkerOptions markerOptions;
-    public static List<LatLng>latLngList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         fa=this;
-        latLngList= new ArrayList<>();
 
         Log.i("Create", "is working"+String.valueOf(i));
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         myReceiver = new MyReceiver();
-        markerOptions = new MarkerOptions();
+        latLngList=new ArrayList<>();
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -215,11 +211,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             //move map camera
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
+
         }
 
 //    @Override
 //    public void onBackPressed() {
-//
 //        moveTaskToBack(true);
 //        super.onBackPressed();
 //
@@ -321,8 +317,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Intent intent = new Intent(MapsActivity.this, Details.class);
                 intent.putExtra("dist", temp);
                 intent.putExtra("duration", chronometer.getText());
-//                Bundle bundle = new Bundle();
-//                bundle.putSerializable("list");
+
                 startActivity(intent);
                 finish();
 

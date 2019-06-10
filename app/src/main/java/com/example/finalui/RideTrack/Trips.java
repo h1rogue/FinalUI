@@ -3,6 +3,7 @@ package com.example.finalui.RideTrack;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -10,13 +11,14 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.finalui.Activities.TaskActivity;
 import com.example.finalui.HomeActivity;
 import com.example.finalui.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Trips extends Activity {
+public class Trips extends Activity implements NotesAdapter.OnItemClickListener{
 
     RecyclerView recyclerView;
     NotesAdapter mAdapter;
@@ -43,7 +45,7 @@ public class Trips extends Activity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(mAdapter);
-
+        mAdapter.setOnItemClickListener(Trips.this);
     }
 
     @Override
@@ -51,5 +53,20 @@ public class Trips extends Activity {
         super.onBackPressed();
         Intent i = new Intent(getApplicationContext(), HomeActivity.class);
         startActivity(i);
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        //set korisu
+    }
+
+    @Override
+    public void onUpdateClick(int position) {
+        Intent intent = new Intent(Trips.this,RideCompleteDetailsActivity.class);
+        TripData tripobj = tripData.get(position);
+        String name = tripobj.getName().trim();
+        Log.d("AAA",name);
+        intent.putExtra("NAME",name);
+        startActivity(intent);
     }
 }

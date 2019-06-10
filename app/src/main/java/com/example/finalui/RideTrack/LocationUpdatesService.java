@@ -115,6 +115,7 @@ public class LocationUpdatesService extends Service {
      */
     private static final int NOTIFICATION_ID = 12345678;
 
+    private List<Double> ll;
     private double pp=0.001;
 
     /**
@@ -267,7 +268,6 @@ public class LocationUpdatesService extends Service {
     }
     @Override
     public void onDestroy() {
-        Log.i("Destroy", "k");
         mServiceHandler.removeCallbacksAndMessages(null);
     }
 
@@ -422,7 +422,8 @@ public class LocationUpdatesService extends Service {
             Log.i("poly1", lat1+" "+lng1+" "+ location.getLatitude()+" "+ location.getLongitude());
             points.add(new LatLng(lat1, lng1));
             points.add(new LatLng(location.getLatitude(), location.getLongitude()));
-            latLngList.add(new LatLng(location.getLatitude(), location.getLongitude()));
+            //changes
+            latLngList.add(latLng);
             polyLineOptions.width(10);
             polyLineOptions.geodesic(true);
             polyLineOptions.color(R.color.colorPrimaryDark);
