@@ -170,7 +170,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/start1" />
 
             <androidx.cardview.widget.CardView
-                android:layout_width="379dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
@@ -308,7 +308,7 @@
                android:textSize="20sp"
                android:id="@+id/markattend"
                android:layout_width="match_parent"
-               android:layout_height="match_parent"
+               android:layout_height="wrap_content"
                android:textColor="#FFFFFF"
                />
        </LinearLayout>

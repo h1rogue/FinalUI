@@ -48,8 +48,7 @@
         <service
             android:name=".RideTrack.LocationUpdatesService"
             android:enabled="true"
-            android:exported="true"
-            android:foregroundServiceType="location" />
+            android:exported="true" />
     </application>
 
 </manifest>

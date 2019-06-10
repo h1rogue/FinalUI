@@ -329,7 +329,7 @@ public class LocationUpdatesService extends Service {
                 .setContentText(text)
                 .setContentTitle(Utils.getLocationTitle(this))
                 .setOngoing(true)
-                .setPriority(Notification.PRIORITY_HIGH)
+                .setPriority(Notification.PRIORITY_LOW)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setTicker(text)
                 .setWhen(System.currentTimeMillis());
@@ -434,6 +434,7 @@ public class LocationUpdatesService extends Service {
                 edit.putString("lat1", String.valueOf(location.getLatitude()));
                 edit.putString("lng1", String.valueOf(location.getLongitude()));
             edit.apply();
+           // mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16 ));
         } else {
             speed1.setText(jj + " kmph");
         }
@@ -443,7 +444,7 @@ public class LocationUpdatesService extends Service {
 
         //i = (long) kk;
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
+       // mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15 ));//dont move camera when still
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
