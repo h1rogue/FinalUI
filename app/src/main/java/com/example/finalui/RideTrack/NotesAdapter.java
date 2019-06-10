@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.finalui.Adapters.MyAdapter;
 import com.example.finalui.R;
 
 import java.util.List;
@@ -17,6 +18,18 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder
 
     private Context context;
     private List<TripData> tripData;
+    private NotesAdapter.OnItemClickListener mListener;
+
+
+
+    public interface OnItemClickListener{
+        void onItemClick(int position);
+        void onUpdateClick(int position);
+    }
+
+    public void setOnItemClickListener(NotesAdapter.OnItemClickListener listener){
+        mListener = listener;
+    }
 
 
     public NotesAdapter(Context context, List<TripData> tripData) {
@@ -58,6 +71,17 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder
             name = view.findViewById(R.id.name);
             dis = view.findViewById(R.id.dis);
             dur = view.findViewById(R.id.dur);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(mListener!=null){
+                        int pos  = getAdapterPosition();
+                        if(pos!=RecyclerView.NO_POSITION){
+                            mListener.onUpdateClick(pos);
+                        }
+                    }
+                }
+            });
         }
     }
 }
