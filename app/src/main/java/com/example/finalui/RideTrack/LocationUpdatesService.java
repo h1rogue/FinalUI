@@ -57,6 +57,7 @@ import static com.example.finalui.RideTrack.MapsActivity.jj;
 import static com.example.finalui.RideTrack.MapsActivity.km;
 import static com.example.finalui.RideTrack.MapsActivity.kms;
 import static com.example.finalui.RideTrack.MapsActivity.lat1;
+import static com.example.finalui.RideTrack.MapsActivity.latLngList;
 import static com.example.finalui.RideTrack.MapsActivity.lng1;
 import static com.example.finalui.RideTrack.MapsActivity.mMap;
 import static com.example.finalui.RideTrack.MapsActivity.speed1;
@@ -421,6 +422,8 @@ public class LocationUpdatesService extends Service {
             Log.i("poly1", lat1+" "+lng1+" "+ location.getLatitude()+" "+ location.getLongitude());
             points.add(new LatLng(lat1, lng1));
             points.add(new LatLng(location.getLatitude(), location.getLongitude()));
+            //changes
+            latLngList.add(new LatLng(location.getLatitude(), location.getLongitude()));
             polyLineOptions.width(10);
             polyLineOptions.geodesic(true);
             polyLineOptions.color(R.color.colorPrimaryDark);

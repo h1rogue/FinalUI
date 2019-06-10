@@ -51,6 +51,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.finalui.HomeActivity.dura;
@@ -76,6 +77,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     SharedPreferences sharedPreferences;
 
     public static LocationManager manager;
+    public static List<LatLng> latLngList;
 
     LocationRequest mLocationRequest;
     Marker mCurrLocationMarker;
@@ -101,6 +103,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Log.i("Create", "is working"+String.valueOf(i));
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         myReceiver = new MyReceiver();
+        latLngList=new ArrayList<>();
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
