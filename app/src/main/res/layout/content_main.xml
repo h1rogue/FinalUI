@@ -71,8 +71,8 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="8dp"
-                android:text="@string/punch_in"
                 android:onClick="PunchInbutt"
+                android:text="@string/punch_in"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView7" />
@@ -84,8 +84,8 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="8dp"
-                android:text="@string/punch_out"
                 android:onClick="PunchOutbutt"
+                android:text="@string/punch_out"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/button7"
                 app:layout_constraintTop_toBottomOf="@+id/textView7" />
@@ -109,8 +109,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:paddingBottom="10dp"
         android:onClick="RideAppOpen"
+        android:paddingBottom="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -214,9 +214,10 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="16dp"
                         android:text="0.00"
-                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
                     <TextView
                         android:id="@+id/textView14"
                         android:layout_width="wrap_content"
@@ -240,7 +241,6 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView13" />
-
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -292,29 +292,30 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="8dp"
+        app:cardCornerRadius="13dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:cardCornerRadius="13dp">
-       <LinearLayout
-           android:id="@+id/colourLin"
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           android:orientation="vertical"
-           android:background="#003366">
-           <TextView
-               android:layout_marginTop="4dp"
-               android:layout_marginBottom="4dp"
-               android:gravity="center"
-               android:layout_gravity="center"
-               android:text="@string/attendance_status"
-               android:textSize="20sp"
-               android:id="@+id/markattend"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:textColor="#FFFFFF"
-               />
-       </LinearLayout>
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/colourLin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#003366"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/markattend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:gravity="center"
+                android:text="@string/attendance_status"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

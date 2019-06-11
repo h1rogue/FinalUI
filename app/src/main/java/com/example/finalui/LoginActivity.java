@@ -45,7 +45,8 @@ public class LoginActivity extends AppCompatActivity implements VvVolleyInterfac
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         if(preferences.getString("token",null) != null){
-            ApplicationVariable.ACCOUNT_DATA.phone=preferences.getString("phone",null);
+            ApplicationVariable.ACCOUNT_DATA.phone=preferences.getString("username",null);
+            ApplicationVariable.ACCOUNT_DATA.token=preferences.getString("token",null);
             progressDialog.show();
             Log.d("DSK_OPER", preferences.getString("token",null));
                 requestUserDetails();

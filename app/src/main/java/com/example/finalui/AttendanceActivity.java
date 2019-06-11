@@ -14,7 +14,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 
-public class AttendanceActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener  {
+public class AttendanceActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener,VvVolleyInterface  {
 
     private VvCalendarView vvCalendarView;
     private Button datepic,punchin,punchout;
@@ -154,5 +154,10 @@ public class AttendanceActivity extends AppCompatActivity implements DatePickerD
         catch (Exception e){
             Log.d("DSK_OPER",e.toString());
         }
+    }
+
+    @Override
+    public void onTaskComplete(String result) {
+
     }
 }

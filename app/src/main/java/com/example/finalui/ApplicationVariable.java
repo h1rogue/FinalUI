@@ -19,7 +19,7 @@ public class ApplicationVariable extends Application {
         static String salary;
         static String blood_group;
         static String attendance;
-        static Boolean punchin;
-        static Boolean punchout;
+        static int punchin=0;
+        static int punchout=0;
     }
 }
