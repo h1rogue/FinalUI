@@ -43,6 +43,7 @@ import com.google.android.gms.tasks.Task;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.finalui.HomeActivity.cdd;
 import static com.example.finalui.HomeActivity.dist;
 import static com.example.finalui.HomeActivity.dura;
 import static com.example.finalui.HomeActivity.openOrClose;
@@ -273,7 +274,7 @@ public class LocationUpdatesService extends Service {
 
     public void requestLocationUpdates() {
         Log.i("c1", String.valueOf(c1));
-        if((c%2==0&&c!=1)||c1==1)//for pause/resume. when paused we dont update the location
+        if((c%2==0&&c!=1)||c1==1||cdd==1)//for pause/resume. when paused we dont update the location
         {
             prefs = getApplicationContext().getSharedPreferences("MyPrefs", MODE_PRIVATE);
             SharedPreferences.Editor edit = prefs.edit();
@@ -360,7 +361,6 @@ public class LocationUpdatesService extends Service {
             Log.e(TAG, "Lost location permission." + unlikely);
         }
     }
-
     private void onNewLocation(Location location) {
         if(c%2==0&&c!=1||c1==1) {
             prefs = getApplicationContext().getSharedPreferences("MyPrefs", MODE_PRIVATE);
@@ -393,8 +393,6 @@ public class LocationUpdatesService extends Service {
             Log.i("Each distance", String.valueOf(GetDistanceFromLatLonInKm(lat1, lng1, lat, lng)));
             kms += GetDistanceFromLatLonInKm(lat1, lng1, lat, lng);
             //    Toast.makeText(MapsActivity.this, "Your speed: " +'\n' + GetDistanceFromLatLonInKm(lat1, lng1, lat, lng)*3600+  '\n' +GetDistanceFromLatLonInKm(lat1, lng1, lat, lng), Toast.LENGTH_LONG).show();
-
-
 
             durations = (String) chronometer.getText();
             char dd3 = durations.charAt(durations.length() - 4);

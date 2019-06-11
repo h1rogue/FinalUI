@@ -54,6 +54,7 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.finalui.HomeActivity.dist;
 import static com.example.finalui.HomeActivity.dura;
 import static com.example.finalui.HomeActivity.pause1;
 import static com.example.finalui.HomeActivity.resume;
@@ -253,6 +254,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     requestPermissions();
                 } else {
                     c++;
+                    HomeActivity.cdd=0;
 
                     aa.setVisibility(View.VISIBLE);
                     bb.setVisibility(View.VISIBLE);
@@ -275,7 +277,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         c1=0;
                         resume.setVisibility(View.INVISIBLE);
                         pause1.setVisibility(View.VISIBLE);
-                        start1.setVisibility(View.INVISIBLE);
+                       // start1.setVisibility(View.INVISIBLE);
                         mRequestLocationUpdatesButton.setText("PAUSE");
                         Log.i("oo", SystemClock.elapsedRealtime() + "   "+ pause);
 
@@ -317,7 +319,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Intent intent = new Intent(MapsActivity.this, Details.class);
                 intent.putExtra("dist", temp);
                 intent.putExtra("duration", chronometer.getText());
-
                 startActivity(intent);
                 finish();
 

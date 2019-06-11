@@ -62,7 +62,7 @@ public class Trips extends Activity implements NotesAdapter.OnItemClickListener{
 
     @Override
     public void onUpdateClick(int position) {
-        Intent intent = new Intent(Trips.this,RideCompleteDetailsActivity.class);
+        Intent intent = new Intent(Trips.this,MapsActivity2.class);
         TripData tripobj = tripData.get(position);
         String name = tripobj.getName().trim();
         Log.d("AAA",name);

@@ -45,7 +45,7 @@ public class HomeActivity extends AppCompatActivity
 
     public static int constant=0,closed=0;
     public static boolean openOrClose;
-    public static int vv=0;
+    public static int vv=0,cdd=0;
     public static TextView dist;
     public static Chronometer dura;
 
@@ -103,6 +103,15 @@ public class HomeActivity extends AppCompatActivity
         //gagan
         dist=findViewById(R.id.dist11);
         dura=findViewById(R.id.dura11);
+
+//        if(cdd==1)
+//        {
+//            dura.setBase(SystemClock.elapsedRealtime());
+//            dura.stop();
+//            dist.setText("0.00");
+//            start1.setVisibility(View.VISIBLE);
+//        }
+
         Log.i("kk", String.valueOf(c));
         if(c!=0&&c%2!=0){
             dura.setBase(chronometer.getBase());
@@ -196,10 +205,18 @@ public class HomeActivity extends AppCompatActivity
     protected void onResume() {
         openOrClose=true;
 
+//        if(cdd==1)
+//        {
+//            Log.i("AAAA", "oo"+cdd);
+//            dura.setBase(SystemClock.elapsedRealtime());
+//            dura.stop();
+//            dist.setText("0");
+//            start1.setVisibility(View.VISIBLE);
+//        }
         if(vv==6) {
             resume.setVisibility(View.VISIBLE);
             pause1.setVisibility(View.VISIBLE);
-            start1.setVisibility(View.INVISIBLE);
+            //start1.setVisibility(View.INVISIBLE);
         }
         Log.i("resume", String.valueOf(openOrClose));
         super.onResume();

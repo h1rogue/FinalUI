@@ -3,6 +3,7 @@ package com.example.finalui.RideTrack;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +21,8 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.finalui.HomeActivity.dura;
+import static com.example.finalui.RideTrack.MapsActivity.chronometer;
 import static com.example.finalui.RideTrack.MapsActivity.latLngList;
 
 public class Details extends AppCompatActivity {
@@ -70,8 +73,6 @@ public class Details extends AppCompatActivity {
 
             for(LatLng latLng : latLngList)
                 Log.d("AAA", latLng.latitude+","+latLng.longitude);
-
-
 
             createSharedref(rideDetailClass);
 
