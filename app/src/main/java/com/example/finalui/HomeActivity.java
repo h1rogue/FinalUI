@@ -15,6 +15,8 @@ import com.example.finalui.RideTrack.Details;
 import com.example.finalui.RideTrack.MapsActivity;
 import com.example.finalui.RideTrack.Trips;
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.JsonObject;
+
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +26,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
 
 import static com.example.finalui.RideTrack.MapsActivity.c;
 import static com.example.finalui.RideTrack.MapsActivity.c1;
@@ -37,8 +48,12 @@ import static com.example.finalui.RideTrack.MapsActivity.ppp;
 import static com.example.finalui.RideTrack.MapsActivity.running;
 import static com.example.finalui.RideTrack.MapsActivity.temp;
 
+
+//  /team/attendance/mark
+// mark_type=1 or 0,phone,token,date,new_data_row
+
 public class HomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,VvVolleyInterface {
 
     private TextView emipd,empname,empdes;
     private Button emdet,punchin,punchout,report,compy;
@@ -74,6 +89,11 @@ public class HomeActivity extends AppCompatActivity
         report=findViewById(R.id.button10);
         emdet=findViewById(R.id.button5);
         compy=findViewById(R.id.compdet);
+
+        emipd.setText(ApplicationVariable.ACCOUNT_DATA.emp_id);
+        empname.setText(ApplicationVariable.ACCOUNT_DATA.name);
+        empdes.setText(ApplicationVariable.ACCOUNT_DATA.role);
+
 
         emdet.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -294,5 +314,42 @@ public class HomeActivity extends AppCompatActivity
     public void RideAppOpen(View view) {
         Intent intent = new Intent(getApplicationContext(), MapsActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
+    }
+
+    public void PunchInbutt(View view) {
+        dorequest();
+    }
+    public void PunchOutbutt(View view) {
+
+    }
+
+    private void dorequest() {
+        Log.d("DSK_OPER","dorequest");
+        VvVolleyClass vvVolleyClass = new VvVolleyClass(this, getApplicationContext());
+        HashMap params = new HashMap<>();
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("mark_type",1);
+        jsonObject.addProperty("lat",0);
+        jsonObject.addProperty("long",0);
+        String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        jsonObject.addProperty("date",date);
+        params.put("new_data_row", jsonObject.toString());
+        params.put("phone",ApplicationVariable.ACCOUNT_DATA.phone);
+        params.put("token",ApplicationVariable.ACCOUNT_DATA.token);
+        params.put("reg_id",ApplicationVariable.ACCOUNT_DATA.reg_id);
+        vvVolleyClass.makeRequest("http://admin.doorhopper.in/api/vdhp/team/attendance/mark", params);
+    }
+
+    @Override
+    public void onTaskComplete(String result) {
+        Log.d("DSK_OPER",result);
+        try {
+            JSONObject jsonObject = new JSONObject(result);
+            String attendanceresp = jsonObject.getString("response");
+            Toast.makeText(getApplicationContext(),attendanceresp,Toast.LENGTH_LONG).show();
+            ApplicationVariable.ACCOUNT_DATA.attendance=attendanceresp;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

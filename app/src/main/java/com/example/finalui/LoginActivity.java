@@ -6,13 +6,16 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.gson.JsonObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,90 +24,60 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class LoginActivity extends AppCompatActivity implements VvVolleyInterface{
-    private TextInputEditText phone, password;
-    private Button login;
-    private String phone_no, pass, GEN_ID;
+    private TextInputEditText editphone,editpassword;
+    private Button button;
+    private String GEN_ID;
+    private String phonestr,passwordstr;
     private ProgressDialog progressDialog;
-    //Request URL
-    private static final String URL = "http://admin.doorhopper.in/api/vdhp/account/login";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        SharedPreferences sharedPreferences = getSharedPreferences("YYY",MODE_PRIVATE);
-        String toka = sharedPreferences.getString("toka",null);
-        if(toka!=null){
-            Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
-            startActivity(intent);
-            finish();
-        }
-
-        phone = findViewById(R.id.phone);
-        password = findViewById(R.id.password);
-        login = findViewById(R.id.btn_login);
+        editphone=findViewById(R.id.phone);
+        editpassword=findViewById(R.id.password);
+        button=findViewById(R.id.btn_login);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("loading...");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.setCanceledOnTouchOutside(false);
         generateRandomString();
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//Check Empty fields
 
-                if(TextUtils.isEmpty(phone.getText().toString().trim()))
-                    phone.setError("this field cannot be blank");
-
-                else if(TextUtils.isEmpty(password.getText().toString().trim()))
-                    password.setError("this field cannot be empty");
-                else{
-                    progressDialog.show();
-                    loginOldUser();
-                }
-            }
-        });
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        if(preferences.getString("token",null) != null){
+            ApplicationVariable.ACCOUNT_DATA.phone=preferences.getString("phone",null);
+            progressDialog.show();
+            Log.d("DSK_OPER", preferences.getString("token",null));
+                requestUserDetails();
+        }
     }
+    public void Login(View view) {
+        if(TextUtils.isEmpty(editphone.getText().toString().trim())){
+            editphone.setError("This field can't be empty");
+        }
+        else if(TextUtils.isEmpty(editpassword.getText().toString().trim())){
+            editpassword.setError("This field can't be empty");
+        }
+        else
+        {
+            Log.d("DSK_OPER","LoginButtonClicked");
+            progressDialog.show();
+           phonestr = editphone.getText().toString().trim();
+           passwordstr = editpassword.getText().toString().trim();
 
-    private void loginOldUser() {
-        VvVolleyClass vvVolleyClass = new VvVolleyClass(this, getApplicationContext());
-        HashMap params = new HashMap<>();
-        params.put("phone", phone.getText().toString().trim());
-        params.put("key", password.getText().toString().trim());
-        params.put("regId", GEN_ID);
-        vvVolleyClass.makeRequest("http://admin.doorhopper.in/api/vdhp/account/login", params);
-    }
-    private void parseData(String response) {
-        try {
-            JSONObject jsonObject = new JSONObject(response);
-            //   String responseres = jsonObject.getString("responseResult");
-            if(jsonObject.getString("responseResult").equals("failure"))
-            {
-                progressDialog.dismiss();
-                Log.d("Token","Not found");
-                Toast.makeText(LoginActivity.this, "Invalid Phone or password", Toast.LENGTH_LONG).show();
-            }else
-            {
-
-                Log.d("Token","found");
-                ApplicationVariable.ACCOUNT_DATA.token = jsonObject.getString("token");
-                //Sharedpref
-                SharedPreferences preferences = getApplicationContext().getSharedPreferences("YYY",MODE_PRIVATE);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putString("toka",ApplicationVariable.ACCOUNT_DATA.token);
-                editor.apply();
-                Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
-                startActivity(intent);
-                progressDialog.dismiss();
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
+            VvVolleyClass vvVolleyClass = new VvVolleyClass(this, getApplicationContext());
+            HashMap params = new HashMap<>();
+            params.put("phone", phonestr);
+            params.put("key", passwordstr);
+            params.put("regId", GEN_ID);
+            vvVolleyClass.makeRequest("http://admin.doorhopper.in/api/vdhp/team/account/login", params);
         }
     }
 
     private void generateRandomString() {
+        Log.d("DSK_OPER","generateRandomString");
         //Random String generation
-        char[] chars1 = "ABCDEF012GHIJKL345MNOPQR678STUVWXYZ9".toCharArray();
+        char[] chars1 = "!@#$N62GHRVWXY78DEF01STUIJKL34Z9AB5MOPQC".toCharArray();
         StringBuilder sb1 = new StringBuilder();
         Random random1 = new Random();
         for (int i = 0; i < 6; i++) {
@@ -112,10 +85,69 @@ public class LoginActivity extends AppCompatActivity implements VvVolleyInterfac
             sb1.append(c1);
         }
         GEN_ID = sb1.toString();
+        ApplicationVariable.ACCOUNT_DATA.reg_id=GEN_ID;
     }
+
+
     @Override
     public void onTaskComplete(String result) {
-        Log.d("DSK_OPER", result);
-        parseData(result);
+        Log.d("DSK_OPER", "SERVER_RESPONSE: " + result);
+        try {
+            JSONObject jsonObject = new JSONObject(result);
+            if(jsonObject.getString("responseFor").equals("login")){
+                Log.d("DSK_OPER","responseForLogin");
+                String token = jsonObject.getString("token");
+                CreateSharedPref("token", token);
+                CreateSharedPref("username", phonestr);
+                ApplicationVariable.ACCOUNT_DATA.phone=phonestr;
+                ApplicationVariable.ACCOUNT_DATA.token=token;
+                requestUserDetails();
+            }
+            else if(jsonObject.getString("responseFor").equals("userDetails")){
+                Log.d("DSK_OPER","responseforuserDetails");
+                ApplicationVariable.ACCOUNT_DATA.emp_id=jsonObject.getString("emp_id");
+                ApplicationVariable.ACCOUNT_DATA.name=jsonObject.getString("name");
+                ApplicationVariable.ACCOUNT_DATA.dob=jsonObject.getString("dob");
+                ApplicationVariable.ACCOUNT_DATA.address=jsonObject.getString("address");
+                ApplicationVariable.ACCOUNT_DATA.contact=jsonObject.getString("phone");
+                ApplicationVariable.ACCOUNT_DATA.role=jsonObject.getString("role");
+                ApplicationVariable.ACCOUNT_DATA.salary=jsonObject.getString("salary");
+                ApplicationVariable.ACCOUNT_DATA.blood_group=jsonObject.getString("blood_group");
+                ApplicationVariable.ACCOUNT_DATA.email=jsonObject.getString("email");
+                ApplicationVariable.ACCOUNT_DATA.city=jsonObject.getString("city");
+
+                Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
+                startActivity(intent);
+                progressDialog.dismiss();
+                finish();
+            }
+            else
+            {
+                progressDialog.dismiss();
+                Log.d("Token","Not found");
+                Toast.makeText(LoginActivity.this, "Invalid Phone or password", Toast.LENGTH_LONG).show();
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void requestUserDetails() {
+        Log.d("DSK_OPER","requestUserDetails");
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        VvVolleyClass vvVolleyClass = new VvVolleyClass(this, getApplicationContext());
+        HashMap params = new HashMap<>();
+        params.put("phone", sharedPreferences.getString("username",null));
+        params.put("token", sharedPreferences.getString("token",null));
+        params.put("regId", ApplicationVariable.ACCOUNT_DATA.reg_id);
+        vvVolleyClass.makeRequest("http://admin.doorhopper.in/api/vdhp/team/account/details", params);
+    }
+
+    private void CreateSharedPref(String name,String val) {
+        Log.d("DSK_OPER","createSharedPrefOfToken");
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(name,val);
+        editor.apply();
     }
 }
