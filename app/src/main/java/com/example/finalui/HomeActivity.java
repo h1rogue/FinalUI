@@ -1,5 +1,6 @@
 package com.example.finalui;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -25,6 +26,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +38,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 
+import static android.view.View.GONE;
 import static com.example.finalui.RideTrack.MapsActivity.c;
 import static com.example.finalui.RideTrack.MapsActivity.c1;
 import static com.example.finalui.RideTrack.MapsActivity.chronometer;
@@ -57,12 +60,17 @@ public class HomeActivity extends AppCompatActivity
 
     private TextView emipd,empname,empdes;
     private Button emdet,punchin,punchout,report,compy;
+    private LinearLayout linearLayout;
+    private ProgressDialog progressDialog;
 
+
+    //attendance/get  --- filter-jsonObject of todaydate
     public static int constant=0,closed=0;
     public static boolean openOrClose;
     public static int vv=0,cdd=0;
     public static TextView dist;
     public static Chronometer dura;
+
 
     public static Button stop,pause1,resume,start1,trips;
     @Override
@@ -80,7 +88,10 @@ public class HomeActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("loading...");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setCanceledOnTouchOutside(false);
         emipd=findViewById(R.id.textView5);
         empname=findViewById(R.id.textView6);
         empdes=findViewById(R.id.textView7);
@@ -89,11 +100,14 @@ public class HomeActivity extends AppCompatActivity
         report=findViewById(R.id.button10);
         emdet=findViewById(R.id.button5);
         compy=findViewById(R.id.compdet);
-
+        linearLayout=findViewById(R.id.colourLin);
         emipd.setText(ApplicationVariable.ACCOUNT_DATA.emp_id);
         empname.setText(ApplicationVariable.ACCOUNT_DATA.name);
         empdes.setText(ApplicationVariable.ACCOUNT_DATA.role);
-
+        punchin.setVisibility(View.VISIBLE);
+        punchout.setVisibility(View.VISIBLE);
+//OnCreate Attendance Details
+        getAttendanceDetails();
 
         emdet.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,15 +137,7 @@ public class HomeActivity extends AppCompatActivity
         //gagan
         dist=findViewById(R.id.dist11);
         dura=findViewById(R.id.dura11);
-
-//        if(cdd==1)
-//        {
-//            dura.setBase(SystemClock.elapsedRealtime());
-//            dura.stop();
-//            dist.setText("0.00");
-//            start1.setVisibility(View.VISIBLE);
-//        }
-
+        
         Log.i("kk", String.valueOf(c));
         if(c!=0&&c%2!=0){
             dura.setBase(chronometer.getBase());
@@ -186,13 +192,6 @@ public class HomeActivity extends AppCompatActivity
             intent.putExtra("duration", dura.getText());
             startActivity(intent);
             MapsActivity.fa.finish();
-//            resume.setVisibility(View.INVISIBLE);
-//            pause1.setVisibility(View.VISIBLE);
-//            mRequestLocationUpdatesButton.setText("PAUSE");
-//            chronometer.setBase(SystemClock.elapsedRealtime() - pause);
-//            chronometer.start();
-//            running = true;
-//            mService.requestLocationUpdates();
         });
         start1.setOnClickListener(view ->
         {
@@ -224,15 +223,6 @@ public class HomeActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         openOrClose=true;
-
-//        if(cdd==1)
-//        {
-//            Log.i("AAAA", "oo"+cdd);
-//            dura.setBase(SystemClock.elapsedRealtime());
-//            dura.stop();
-//            dist.setText("0");
-//            start1.setVisibility(View.VISIBLE);
-//        }
         if(vv==6) {
             resume.setVisibility(View.VISIBLE);
             pause1.setVisibility(View.VISIBLE);
@@ -317,14 +307,31 @@ public class HomeActivity extends AppCompatActivity
     }
 
     public void PunchInbutt(View view) {
-        dorequest();
+        doPuchInrequest();
     }
     public void PunchOutbutt(View view) {
-
+        doPunchOutrequest();
     }
 
-    private void dorequest() {
-        Log.d("DSK_OPER","dorequest");
+    private void doPunchOutrequest() {
+        Log.d("DSK_OPER","doPuchOutrequest");
+        VvVolleyClass vvVolleyClass = new VvVolleyClass(this, getApplicationContext());
+        HashMap params = new HashMap<>();
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("mark_type",0);
+        jsonObject.addProperty("lat",0);
+        jsonObject.addProperty("long",0);
+        String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        jsonObject.addProperty("date",date);
+        params.put("new_data_row", jsonObject.toString());
+        params.put("phone",ApplicationVariable.ACCOUNT_DATA.phone);
+        params.put("token",ApplicationVariable.ACCOUNT_DATA.token);
+        params.put("reg_id",ApplicationVariable.ACCOUNT_DATA.reg_id);
+        vvVolleyClass.makeRequest("http://admin.doorhopper.in/api/vdhp/team/attendance/mark", params);
+    }
+
+    private void doPuchInrequest() {
+        Log.d("DSK_OPER","doPuchInrequest");
         VvVolleyClass vvVolleyClass = new VvVolleyClass(this, getApplicationContext());
         HashMap params = new HashMap<>();
         JsonObject jsonObject = new JsonObject();
@@ -340,16 +347,74 @@ public class HomeActivity extends AppCompatActivity
         vvVolleyClass.makeRequest("http://admin.doorhopper.in/api/vdhp/team/attendance/mark", params);
     }
 
+   private void getAttendanceDetails(){
+        progressDialog.show();
+       Log.d("DSK_OPER","getAttendance Details");
+       VvVolleyClass vvVolleyClass = new VvVolleyClass(this, getApplicationContext());
+       HashMap params = new HashMap<>();
+       params.put("phone",ApplicationVariable.ACCOUNT_DATA.phone);
+       params.put("token",ApplicationVariable.ACCOUNT_DATA.token);
+       params.put("reg_id",ApplicationVariable.ACCOUNT_DATA.reg_id);
+       JsonObject jsonObject = new JsonObject();
+       String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+       jsonObject.addProperty("date",date);
+       params.put("filter",jsonObject.toString());
+       vvVolleyClass.makeRequest("http://admin.doorhopper.in/api/vdhp/team/attendance/get", params);
+    }
+
     @Override
     public void onTaskComplete(String result) {
         Log.d("DSK_OPER",result);
         try {
             JSONObject jsonObject = new JSONObject(result);
-            String attendanceresp = jsonObject.getString("response");
-            Toast.makeText(getApplicationContext(),attendanceresp,Toast.LENGTH_LONG).show();
-            ApplicationVariable.ACCOUNT_DATA.attendance=attendanceresp;
+            //todo-get equals
+            if(jsonObject.getString("responseFor").equals("team/attendance/get")){
+                afterCheckAttendance(jsonObject);
+            }else if(jsonObject.getString("responseFor").equals("team/attendance/mark")){
+                forButtonPressed(jsonObject);
+            }
+            else{
+                Toast.makeText(this, "Not Matched Api", Toast.LENGTH_SHORT).show();
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    private void forButtonPressed(JSONObject jsonObject) throws JSONException {
+        if(jsonObject.getString("response").equals("punchin")){
+            punchin.setVisibility(GONE);
+        }else if(jsonObject.getString("response").equals("punchin")){
+            punchout.setVisibility(GONE);
+        }
+    }
+
+    private void afterCheckAttendance(JSONObject jsonObject) throws JSONException {
+        String timeIn="";
+        String timeOut="";
+        timeIn=jsonObject.getJSONArray("data_rows").getString(3);
+        timeOut=jsonObject.getJSONArray("data_rows").getString(6);
+
+        if(timeIn==null && timeOut==null){
+            Toast.makeText(this, "Give Attendance", Toast.LENGTH_LONG).show();
+            progressDialog.dismiss();
+            ApplicationVariable.ACCOUNT_DATA.punchin=false;
+            ApplicationVariable.ACCOUNT_DATA.punchout=false;
+        }
+        else if(timeIn.length()>0 && timeOut==null){
+            Toast.makeText(this, "PunchOut Not Done", Toast.LENGTH_LONG).show();
+            progressDialog.dismiss();
+            ApplicationVariable.ACCOUNT_DATA.punchin=true;
+            ApplicationVariable.ACCOUNT_DATA.punchout=false;
+            punchin.setVisibility(GONE);
+        }
+        else if(timeIn.length()>0 && timeOut.length()>0){
+            Toast.makeText(this, "Both PunchIn PunchOut Done", Toast.LENGTH_LONG).show();
+            progressDialog.dismiss();
+            ApplicationVariable.ACCOUNT_DATA.punchin=true;
+            ApplicationVariable.ACCOUNT_DATA.punchout=true;
+            punchout.setVisibility(GONE);
+        }
+
     }
 }
