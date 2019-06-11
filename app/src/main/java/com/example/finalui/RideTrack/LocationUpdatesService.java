@@ -423,7 +423,8 @@ public class LocationUpdatesService extends Service {
             points.add(new LatLng(lat1, lng1));
             points.add(new LatLng(location.getLatitude(), location.getLongitude()));
             //changes
-            latLngList.add(latLng);
+            latLngList.add(new LatLng(lat1,lng1));
+            latLngList.add(new LatLng(location.getLatitude(),location.getLongitude()));
             polyLineOptions.width(10);
             polyLineOptions.geodesic(true);
             polyLineOptions.color(R.color.colorPrimaryDark);

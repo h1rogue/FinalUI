@@ -186,7 +186,7 @@ public class HomeActivity extends AppCompatActivity
         } else {
             //moveTaskToBack(true);
             //finish();
-            i++;
+//            i++;
             moveTaskToBack(true);
             super.onBackPressed();
         }

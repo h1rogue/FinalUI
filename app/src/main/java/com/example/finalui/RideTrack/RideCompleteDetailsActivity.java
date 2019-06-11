@@ -34,6 +34,7 @@ private RideDetailClass ride;
         //Type type = new TypeToken<ArrayList<RideDetailClass>>(){}.getType();
         ride=gson.fromJson(json,RideDetailClass.class);
         Log.d("AAA",ride.getTripname());
+        Log.d("AAA",ride.getTrack().get(0).toString());
         if(ride==null){
             ride=new RideDetailClass(null,null,0.0f,0.0f,null);
         }
