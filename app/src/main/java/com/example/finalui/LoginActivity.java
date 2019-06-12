@@ -102,6 +102,7 @@ public class LoginActivity extends AppCompatActivity implements VvVolleyInterfac
                 CreateSharedPref("username", phonestr);
                 ApplicationVariable.ACCOUNT_DATA.phone=phonestr;
                 ApplicationVariable.ACCOUNT_DATA.token=token;
+
                 requestUserDetails();
             }
             else if(jsonObject.getString("responseFor").equals("userDetails")){
@@ -116,6 +117,9 @@ public class LoginActivity extends AppCompatActivity implements VvVolleyInterfac
                 ApplicationVariable.ACCOUNT_DATA.blood_group=jsonObject.getString("blood_group");
                 ApplicationVariable.ACCOUNT_DATA.email=jsonObject.getString("email");
                 ApplicationVariable.ACCOUNT_DATA.city=jsonObject.getString("city");
+
+                Log.d("dd" , "uu"+ApplicationVariable.ACCOUNT_DATA.token);
+
 
                 Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
                 startActivity(intent);

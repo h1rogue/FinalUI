@@ -23,3 +23,8 @@ public class ApplicationVariable extends Application {
         static int punchout=0;
     }
 }
+
+//team/salary/get
+//demo data -
+
+

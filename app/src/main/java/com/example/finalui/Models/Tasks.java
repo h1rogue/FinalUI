@@ -128,3 +128,30 @@ public class Tasks {
         this.taskdate= taskdate;
     }
 }
+
+
+
+//  for (int i = 0; i < arrSize; ++i) {
+//        String key = a.getJSONObject(i).getString("month");
+//        key += '_';
+//        key += a.getJSONObject(i).getString("type");//this k is the key
+//        SalaryReport salaryReport;
+//        float ss = 0;
+//
+//        salaryModel = new SalaryModel(a.getJSONObject(i).getString("id"), a.getJSONObject(i).getString("date_credited"),a.getJSONObject(i).getString("amount"),
+//        a.getJSONObject(i).getString("month"), a.getJSONObject(i).getString("type"));
+//
+//        if(map.containsKey(key) && map.get(key) != null){
+//        SalaryReport tempSalaryReport = map.get(key);
+//        ss = tempSalaryReport.amount;
+//        ss = ss + Float.parseFloat(a.getJSONObject(i).getString("amount"));
+//        tempSalaryReport.records.add(salaryModel);
+//        }
+//        else{
+//        SalaryReport tempSalaryReport =
+//        new SalaryReport(salaryModel.month, salaryModel.type, salaryModel.amount, new ArrayList<>());
+//        map.put(key, tempSalaryReport);
+//        }
+//        //map.put(key,salaryReport);
+//        Log.d("pp", String.valueOf(map.size()));
+//        }

@@ -45,7 +45,6 @@ public class TaskActivity extends AppCompatActivity implements MyAdapter.OnItemC
         puchaseModelList=new ArrayList<>();
         commentModelList=new ArrayList<>();
 
-
         model1=new UpdateModel("123", "#122", "12/2/12", "IN DUE", "22/22/19", "cse",
                                 "Hir", "dd");
 

@@ -94,8 +94,8 @@ public class ExpandabelListAdapter extends BaseExpandableListAdapter {
 
       SalaryModel  salaryModel = (SalaryModel) getChild(groupPosition, childPosition);
           String childmonth = salaryModel.getMonth();
-          int amount = salaryModel.getAmount();
-          String remarks = salaryModel.getRemarks();
+          String amount = salaryModel.getAmount();
+          String remarks = salaryModel.getDateCredited();
 
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context

@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.finalui.HomeActivity.dura;
+import static com.example.finalui.HomeActivity.fa1;
 import static com.example.finalui.RideTrack.MapsActivity.chronometer;
 import static com.example.finalui.RideTrack.MapsActivity.latLngList;
 
@@ -81,10 +82,10 @@ public class Details extends AppCompatActivity {
             Toast.makeText(this, "Trip saved!", Toast.LENGTH_LONG).show();
             finish();
             Intent i = new Intent(Details.this, HomeActivity.class);
+            fa1.finish();//change
             startActivity(i);
         }
     }
-
     private void createSharedref(RideDetailClass riderlist) {
         SharedPreferences sharedPreferences = getSharedPreferences("GAME",MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();

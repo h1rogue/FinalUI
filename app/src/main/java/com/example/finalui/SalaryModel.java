@@ -1,36 +1,56 @@
 package com.example.finalui;
 
 public class SalaryModel {
-    String month,remarks;
-    int amount;
+    String id,dateCredited;
+    String amount;
+    String month;
+    String type;
 
-    public SalaryModel(String month, String remarks, int amount) {
-        this.month = month;
-        this.remarks = remarks;
+    public SalaryModel(String remarks, String dateCredited, String amount, String month, String type) {
+        this.dateCredited = dateCredited;
+        this.id = remarks;
         this.amount = amount;
+        this.month=month;
+        this.type=type;
+    }
+
+    public String getDateCredited() {
+        return dateCredited;
     }
 
     public String getMonth() {
         return month;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public void setMonth(String month) {
         this.month = month;
     }
 
-    public String getRemarks() {
-        return remarks;
+    public void setDateCredited(String month) {
+        this.dateCredited = month;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public void setRemarks(String remarks) {
-        this.remarks = remarks;
+        this.id = remarks;
     }
 
-    public int getAmount() {
+    public String getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(String amount) {
         this.amount = amount;
     }
 }
