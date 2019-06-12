@@ -57,7 +57,6 @@ public class AttendanceActivity extends AppCompatActivity implements
         }
 
 
-        //Required
         datepic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
