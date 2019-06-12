@@ -18,7 +18,8 @@ import java.util.HashSet;
 
 import static android.view.View.GONE;
 
-public class AttendanceActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, VvVolleyInterface {
+public class AttendanceActivity extends AppCompatActivity implements
+        VvCalendarView.EventHandler, VvVolleyInterface {
 
     private VvCalendarView vvCalendarView;
     private Button datepic, punchin, punchout;
@@ -65,8 +66,6 @@ public class AttendanceActivity extends AppCompatActivity implements DatePickerD
                 int cmonth = calendar.get(Calendar.MONTH);
                 int cyear = calendar.get(Calendar.YEAR);
 
-                dialog = DatePickerDialog.newInstance(AttendanceActivity.this, cyear, cmonth, cday);
-                dialog.show(getSupportFragmentManager(), "datepickerID");
             }
         });
         //PunchIN
@@ -105,76 +104,21 @@ public class AttendanceActivity extends AppCompatActivity implements DatePickerD
             }
         });
 
-
-        finpicker = (DatePickerDialog) getSupportFragmentManager().findFragmentByTag("datepickerID");
-        if (finpicker != null) finpicker.setOnDateSetListener(this);
-
     }
 
-    @Override
-    public void onDateSet(DatePickerDialog view, int years, int monthOfYear, int dayOfMonth) {
-        day = dayOfMonth;
-        month = monthOfYear + 1;
-        year = years;
-        textView.setText(year + "/" + month + "/" + day);
-        aftrdateSet(year,month,day);
-
-    }
-
-    private void aftrdateSet(int year,int month,int day) {
-
-    }
-
-
-    private void showUpdateorNot(int year, int month, int day) {
-
-        punchin.setVisibility(View.VISIBLE);
-        punchout.setVisibility(View.GONE);
-        try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-            sselected = simpleDateFormat.parse(day + "-" + month + "-" + year);
-
-            Log.d("DSK_OPER", "sselected date" + sselected);
-
-            for (ObjectAttendance attendance : eventList) {
-                Log.d("DSK_OPER", "attendace date" + attendance.date.toString());
-                if (attendance.date.toString().equals(sselected.toString())) {
-                    if (!attendance.punchIn) {
-                        Log.d("DSK_OPER", "punchINWorking");
-                        punchin.setVisibility(View.VISIBLE);
-                        punchout.setVisibility(View.GONE);
-                        atte.setText(R.string.punch_in);
-                    }
-                    if (attendance.punchOut && attendance.punchIn) {
-                        Log.d("DSK_OPER", "Both Working");
-                        punchin.setVisibility(View.GONE);
-                        punchout.setVisibility(View.GONE);
-                        atte.setText(R.string.attmark);
-                    }
-                    if (attendance.punchIn && !attendance.punchOut) {
-                        punchin.setVisibility(View.GONE);
-                        punchout.setVisibility(View.VISIBLE);
-                        atte.setText(R.string.punch_out);
-
-                    }
-                    if (attendance.punchOut && !attendance.punchIn) {
-                        punchin.setVisibility(View.GONE);
-                        punchout.setVisibility(View.GONE);
-                        atte.setText("INVALID DATA");
-                    }
-                    break;
-                } else {
-                    //Toast.makeText(MainActivity.this, "Date Not Present in the Attendance", Toast.LENGTH_LONG).show();
-                    atte.setText("");
-                }
-            }
-        } catch (Exception e) {
-            Log.d("DSK_OPER", e.toString());
-        }
-    }
 
     @Override
     public void onTaskComplete(String result) {
+
+    }
+
+    @Override
+    public void onDayLongPress(Date date) {
+
+    }
+
+    @Override
+    public void onDayPress(Date date) {
 
     }
 }

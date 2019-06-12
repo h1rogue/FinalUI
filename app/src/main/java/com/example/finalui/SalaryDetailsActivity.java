@@ -14,6 +14,7 @@ public class SalaryDetailsActivity extends AppCompatActivity {
     ExpandableListView expListView;
     List<HeaderModel> listDataHeader;
     HashMap<HeaderModel, List<SalaryModel>> listDataChild;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

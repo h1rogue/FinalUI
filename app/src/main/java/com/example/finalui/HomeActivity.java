@@ -104,11 +104,12 @@ public class HomeActivity extends AppCompatActivity
         emdet = findViewById(R.id.button5);
         compy = findViewById(R.id.compdet);
         linearLayout = findViewById(R.id.colourLin);
+
         emipd.setText(ApplicationVariable.ACCOUNT_DATA.emp_id);
         empname.setText(ApplicationVariable.ACCOUNT_DATA.name);
         empdes.setText(ApplicationVariable.ACCOUNT_DATA.role);
         punchin.setVisibility(View.VISIBLE);
-        punchout.setVisibility(View.VISIBLE);
+        punchout.setVisibility(GONE);
 //OnCreate Attendance Details
         if (ApplicationVariable.ACCOUNT_DATA.punchin == 0 && ApplicationVariable.ACCOUNT_DATA.punchout == 0) {
             Log.d("DSK_OPER","FIRST TIME RUNNING...");
@@ -116,11 +117,12 @@ public class HomeActivity extends AppCompatActivity
         } else if (ApplicationVariable.ACCOUNT_DATA.punchin == 2 && ApplicationVariable.ACCOUNT_DATA.punchout == 1) {
             Log.d("DSK_OPER","PUNCHIN DONE PUNCHOUT LEFT");
             linearLayout.setBackgroundColor(getResources().getColor(R.color.open_color));
-            markAttendance.setText(R.string.punch_in);
+            markAttendance.setText(R.string.punched_in_home);
             punchin.setVisibility(GONE);
+            punchout.setVisibility(View.VISIBLE);
         } else if (ApplicationVariable.ACCOUNT_DATA.punchin == 2 && ApplicationVariable.ACCOUNT_DATA.punchout == 2) {
             Log.d("DSK_OPER","PUNCHOUT ALSO DONE!!");
-            markAttendance.setText(R.string.punch_out);
+            markAttendance.setText(R.string.punched_out_home);
             linearLayout.setBackgroundColor(getResources().getColor(R.color.colorAccent));
             punchin.setVisibility(GONE);
             punchout.setVisibility(GONE);
@@ -423,7 +425,8 @@ public class HomeActivity extends AppCompatActivity
             ApplicationVariable.ACCOUNT_DATA.punchin = 2;
             linearLayout.setBackgroundColor(getResources().getColor(R.color.open_color));
             punchin.setVisibility(GONE);
-            markAttendance.setText(R.string.punch_in);
+            punchout.setVisibility(View.VISIBLE);
+            markAttendance.setText(R.string.punched_in_home);
         }
 
         else if(timein.length()>0 && timeout.length()>0){
@@ -432,7 +435,7 @@ public class HomeActivity extends AppCompatActivity
             ApplicationVariable.ACCOUNT_DATA.punchout= 2;
             linearLayout.setBackgroundColor(getResources().getColor(R.color.colorAccent));
             punchout.setVisibility(GONE);
-            markAttendance.setText(R.string.punch_out);
+            markAttendance.setText(R.string.punched_out_home);
         }
     }
 
@@ -447,7 +450,7 @@ public class HomeActivity extends AppCompatActivity
             ApplicationVariable.ACCOUNT_DATA.punchin = 1;
             ApplicationVariable.ACCOUNT_DATA.punchout = 1;
             linearLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-            markAttendance.setText(R.string.absent);
+            markAttendance.setText(R.string.mark_attendace);
         } else {
             timeIn = jsonObject.getJSONArray("data_rows").getJSONObject(0).getString("time_in");
             timeOut = jsonObject.getJSONArray("data_rows").getJSONObject(0).getString("time_out");
@@ -457,8 +460,9 @@ public class HomeActivity extends AppCompatActivity
                 ApplicationVariable.ACCOUNT_DATA.punchin = 2;
                 ApplicationVariable.ACCOUNT_DATA.punchout = 1;
                 punchin.setVisibility(GONE);
+                punchout.setVisibility(View.VISIBLE);
                 linearLayout.setBackgroundColor(getResources().getColor(R.color.open_color));
-                markAttendance.setText(R.string.punch_in);
+                markAttendance.setText(R.string.punched_in_home);
             } else if (timeIn.length() > 0 && timeOut.length() > 0) {
                 Toast.makeText(this, "Both PunchIn PunchOut Done", Toast.LENGTH_LONG).show();
                 progressDialog.dismiss();
@@ -467,7 +471,7 @@ public class HomeActivity extends AppCompatActivity
                 punchout.setVisibility(GONE);
                 punchin.setVisibility(GONE);
                 linearLayout.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                markAttendance.setText(R.string.punch_out);
+                markAttendance.setText(R.string.punched_out_home);
             }
 
         }
