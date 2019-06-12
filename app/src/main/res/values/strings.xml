@@ -111,5 +111,6 @@
     <string name="_000000">000000</string>
     <string name="present_salary">Present Salary</string>
     <string name="title_activity_maps2">Map</string>
+    <string name="absent">ABSENT</string>
 
 </resources>

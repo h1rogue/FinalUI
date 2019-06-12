@@ -8,36 +8,55 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 
-public class AttendanceActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener,VvVolleyInterface  {
+import static android.view.View.GONE;
+
+public class AttendanceActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, VvVolleyInterface {
 
     private VvCalendarView vvCalendarView;
-    private Button datepic,punchin,punchout;
+    private Button datepic, punchin, punchout;
     Calendar calendar;
-    DatePickerDialog dialog,finpicker;
-    HashSet<ObjectAttendance> eventList ;
-    int day,month,year;
-    TextView textView,atte;
+    DatePickerDialog dialog, finpicker;
+    HashSet<ObjectAttendance> eventList;
+    int day, month, year;
+    TextView textView, atte;
     Date sselected;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attendance);
         getSupportActionBar().setTitle("Attendance");
-        datepic=findViewById(R.id.button);
-        punchin=findViewById(R.id.button2);
-        punchout=findViewById(R.id.button3);
-        vvCalendarView=findViewById(R.id.calendervv);
+        datepic = findViewById(R.id.button);
+        punchin = findViewById(R.id.button2);
+        punchout = findViewById(R.id.button3);
+        vvCalendarView = findViewById(R.id.calendervv);
 
         eventList = new HashSet<>();
-        textView=findViewById(R.id.textView);
-        atte=findViewById(R.id.attendance);
+        textView = findViewById(R.id.textView);
+        atte = findViewById(R.id.attendance);
 
+
+        if (ApplicationVariable.ACCOUNT_DATA.punchin == 2 && ApplicationVariable.ACCOUNT_DATA.punchout == 1) {
+            Log.d("DSK_OPER", "PUNCHIN DONE PUNCHOUT LEFT");
+
+            punchin.setVisibility(GONE);
+        } else if (ApplicationVariable.ACCOUNT_DATA.punchin == 2 && ApplicationVariable.ACCOUNT_DATA.punchout == 2) {
+            Log.d("DSK_OPER", "PUNCHOUT ALSO DONE!!");
+
+            punchin.setVisibility(GONE);
+            punchout.setVisibility(GONE);
+        }
+
+
+        //Required
         datepic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,20 +65,19 @@ public class AttendanceActivity extends AppCompatActivity implements DatePickerD
                 int cmonth = calendar.get(Calendar.MONTH);
                 int cyear = calendar.get(Calendar.YEAR);
 
-                dialog  = DatePickerDialog.newInstance(AttendanceActivity.this,cyear,cmonth,cday);
-                dialog.show(getSupportFragmentManager(),"datepickerID");
+                dialog = DatePickerDialog.newInstance(AttendanceActivity.this, cyear, cmonth, cday);
+                dialog.show(getSupportFragmentManager(), "datepickerID");
             }
         });
-
+        //PunchIN
         punchin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
                     Log.d("DSK_OPER", "RUNNING");
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-                    eventList.add(new ObjectAttendance(simpleDateFormat.parse(day+"-"+month+"-"+year), true, false));
-                }
-                catch (Exception e){
+                    eventList.add(new ObjectAttendance(simpleDateFormat.parse(day + "-" + month + "-" + year), true, false));
+                } catch (Exception e) {
                     Log.d("DSK_OPER", e.toString());
                 }
                 vvCalendarView.setAttendance(eventList);
@@ -72,14 +90,13 @@ public class AttendanceActivity extends AppCompatActivity implements DatePickerD
             public void onClick(View v) {
                 try {
 
-                    for(ObjectAttendance attendance : eventList){
-                        if(attendance.date.toString().equals(sselected.toString())){
-                            attendance.punchOut=true;
+                    for (ObjectAttendance attendance : eventList) {
+                        if (attendance.date.toString().equals(sselected.toString())) {
+                            attendance.punchOut = true;
                         }
                     }
                     // eventList.add(new ObjectAttendance(simpleDateFormat.parse(day+"-"+month+"-"+year), true, true));
-                }
-                catch (Exception e){
+                } catch (Exception e) {
                     Log.d("DSK_OPER", e.toString());
                 }
                 vvCalendarView.setAttendance(eventList);
@@ -90,69 +107,69 @@ public class AttendanceActivity extends AppCompatActivity implements DatePickerD
 
 
         finpicker = (DatePickerDialog) getSupportFragmentManager().findFragmentByTag("datepickerID");
-        if(finpicker!=null) finpicker.setOnDateSetListener(this);
+        if (finpicker != null) finpicker.setOnDateSetListener(this);
 
     }
 
     @Override
     public void onDateSet(DatePickerDialog view, int years, int monthOfYear, int dayOfMonth) {
-        day=dayOfMonth;
-        month=monthOfYear+1;
-        year=years;
-        textView.setText(day+"/"+month+"/"+year);
-        punchin.setEnabled(true);
-        punchout.setEnabled(true);
-        showUpdateorNot(year,month,day);
+        day = dayOfMonth;
+        month = monthOfYear + 1;
+        year = years;
+        textView.setText(year + "/" + month + "/" + day);
+        aftrdateSet(year,month,day);
+
+    }
+
+    private void aftrdateSet(int year,int month,int day) {
+
     }
 
 
-    private void showUpdateorNot(int year,int month,int day) {
+    private void showUpdateorNot(int year, int month, int day) {
 
         punchin.setVisibility(View.VISIBLE);
         punchout.setVisibility(View.GONE);
-        try{
+        try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-            sselected = simpleDateFormat.parse(day+"-"+month+"-"+year);
+            sselected = simpleDateFormat.parse(day + "-" + month + "-" + year);
 
-            Log.d("DSK_OPER","sselected date"+sselected);
+            Log.d("DSK_OPER", "sselected date" + sselected);
 
-            for(ObjectAttendance attendance :eventList){
-                Log.d("DSK_OPER","attendace date"+attendance.date.toString());
-                if(attendance.date.toString().equals(sselected.toString())){
-                    if(!attendance.punchIn){
-                        Log.d("DSK_OPER","punchINWorking");
+            for (ObjectAttendance attendance : eventList) {
+                Log.d("DSK_OPER", "attendace date" + attendance.date.toString());
+                if (attendance.date.toString().equals(sselected.toString())) {
+                    if (!attendance.punchIn) {
+                        Log.d("DSK_OPER", "punchINWorking");
                         punchin.setVisibility(View.VISIBLE);
                         punchout.setVisibility(View.GONE);
                         atte.setText(R.string.punch_in);
                     }
-                    if(attendance.punchOut && attendance.punchIn){
-                        Log.d("DSK_OPER","Both Working");
+                    if (attendance.punchOut && attendance.punchIn) {
+                        Log.d("DSK_OPER", "Both Working");
                         punchin.setVisibility(View.GONE);
                         punchout.setVisibility(View.GONE);
                         atte.setText(R.string.attmark);
                     }
-                    if(attendance.punchIn && !attendance.punchOut){
+                    if (attendance.punchIn && !attendance.punchOut) {
                         punchin.setVisibility(View.GONE);
                         punchout.setVisibility(View.VISIBLE);
                         atte.setText(R.string.punch_out);
 
                     }
-                    if(attendance.punchOut && !attendance.punchIn){
+                    if (attendance.punchOut && !attendance.punchIn) {
                         punchin.setVisibility(View.GONE);
                         punchout.setVisibility(View.GONE);
                         atte.setText("INVALID DATA");
                     }
                     break;
-                }
-                else
-                {
+                } else {
                     //Toast.makeText(MainActivity.this, "Date Not Present in the Attendance", Toast.LENGTH_LONG).show();
                     atte.setText("");
                 }
             }
-        }
-        catch (Exception e){
-            Log.d("DSK_OPER",e.toString());
+        } catch (Exception e) {
+            Log.d("DSK_OPER", e.toString());
         }
     }
 

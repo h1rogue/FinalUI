@@ -116,11 +116,11 @@ public class HomeActivity extends AppCompatActivity
         } else if (ApplicationVariable.ACCOUNT_DATA.punchin == 2 && ApplicationVariable.ACCOUNT_DATA.punchout == 1) {
             Log.d("DSK_OPER","PUNCHIN DONE PUNCHOUT LEFT");
             linearLayout.setBackgroundColor(getResources().getColor(R.color.open_color));
-            markAttendance.setText("PUNCHED IN");
+            markAttendance.setText(R.string.punch_in);
             punchin.setVisibility(GONE);
         } else if (ApplicationVariable.ACCOUNT_DATA.punchin == 2 && ApplicationVariable.ACCOUNT_DATA.punchout == 2) {
             Log.d("DSK_OPER","PUNCHOUT ALSO DONE!!");
-            markAttendance.setText("PUNCHED OUT");
+            markAttendance.setText(R.string.punch_out);
             linearLayout.setBackgroundColor(getResources().getColor(R.color.colorAccent));
             punchin.setVisibility(GONE);
             punchout.setVisibility(GONE);
@@ -398,8 +398,7 @@ public class HomeActivity extends AppCompatActivity
                 Log.d("DSK_OPER", "getAttendance");
                 afterCheckAttendance(jsonObject);
             } else if (jsonObject.getString("responseFor").equals("team/attendance/mark")) {
-
-                afterButtonClick();
+                afterButtonClick(jsonObject);
                 Log.d("DSK_OPER", "Attendance after button");
                 Toast.makeText(this, "Button Clicked", Toast.LENGTH_SHORT).show();
             } else {
@@ -413,20 +412,27 @@ public class HomeActivity extends AppCompatActivity
         }
     }
 
-    private void afterButtonClick() {
-        progressDialog.dismiss();
-        if(pIN==1)
+    private void afterButtonClick(JSONObject clickResponse) throws JSONException {
+        Log.d("DSK_OPER", "afterButtonClicked");
+        String timein=clickResponse.getJSONObject("data_row").getString("time_in");
+        String timeout=clickResponse.getJSONObject("data_row").getString("time_out");
+        if(timein.length()>0 && timeout.equals("null"))
         {
+            progressDialog.dismiss();
+            Log.d("DSK_OPER", "punCHin DONE");
             ApplicationVariable.ACCOUNT_DATA.punchin = 2;
             linearLayout.setBackgroundColor(getResources().getColor(R.color.open_color));
             punchin.setVisibility(GONE);
-            markAttendance.setText("PUNCHED IN");
+            markAttendance.setText(R.string.punch_in);
         }
-        else if(pOUT==1){
+
+        else if(timein.length()>0 && timeout.length()>0){
+            progressDialog.dismiss();
+            Log.d("DSK_OPER", "PUNCHOUT DONE");
             ApplicationVariable.ACCOUNT_DATA.punchout= 2;
             linearLayout.setBackgroundColor(getResources().getColor(R.color.colorAccent));
             punchout.setVisibility(GONE);
-            markAttendance.setText("PUNCHED OUT");
+            markAttendance.setText(R.string.punch_out);
         }
     }
 
@@ -441,7 +447,7 @@ public class HomeActivity extends AppCompatActivity
             ApplicationVariable.ACCOUNT_DATA.punchin = 1;
             ApplicationVariable.ACCOUNT_DATA.punchout = 1;
             linearLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-            markAttendance.setText("ABSENT");
+            markAttendance.setText(R.string.absent);
         } else {
             timeIn = jsonObject.getJSONArray("data_rows").getJSONObject(0).getString("time_in");
             timeOut = jsonObject.getJSONArray("data_rows").getJSONObject(0).getString("time_out");
@@ -452,7 +458,7 @@ public class HomeActivity extends AppCompatActivity
                 ApplicationVariable.ACCOUNT_DATA.punchout = 1;
                 punchin.setVisibility(GONE);
                 linearLayout.setBackgroundColor(getResources().getColor(R.color.open_color));
-                markAttendance.setText("PUNCHED IN");
+                markAttendance.setText(R.string.punch_in);
             } else if (timeIn.length() > 0 && timeOut.length() > 0) {
                 Toast.makeText(this, "Both PunchIn PunchOut Done", Toast.LENGTH_LONG).show();
                 progressDialog.dismiss();
@@ -461,7 +467,7 @@ public class HomeActivity extends AppCompatActivity
                 punchout.setVisibility(GONE);
                 punchin.setVisibility(GONE);
                 linearLayout.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                markAttendance.setText("PUNCHED OUT");
+                markAttendance.setText(R.string.punch_out);
             }
 
         }
