@@ -8,42 +8,40 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class ExpandabelListAdapter extends BaseExpandableListAdapter {
 
     private Context _context;
-    private List<HeaderModel> _listDataHeader; // header titles
-    private HashMap<HeaderModel, List<SalaryModel>> _listDataChild;
+    private HashMap<String, SalaryReport> salaryReports;
+    private ArrayList<String> keys = new ArrayList<>();
 
-
-    public ExpandabelListAdapter(Context _context, List<HeaderModel> _listDataHeader, HashMap<HeaderModel, List<SalaryModel>> _listDataChild) {
+    public ExpandabelListAdapter(Context _context, HashMap<String, SalaryReport> salaryReport, ArrayList<String> keys) {
         this._context = _context;
-        this._listDataHeader = _listDataHeader;
-        this._listDataChild = _listDataChild;
+        this.salaryReports = salaryReport;
+        this.keys = keys;
     }
 
 
     @Override
     public int getGroupCount() {
-        return _listDataHeader.size();
+        return salaryReports.size();
     }
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return _listDataChild.get(_listDataHeader.get(groupPosition)).size();
+        return salaryReports.get(keys.get(groupPosition)).records.size();
     }
 
     @Override
     public Object getGroup(int groupPosition) {
-        return _listDataHeader.get(groupPosition);
+        return salaryReports.get(keys.get(groupPosition));
     }
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return _listDataChild.get(_listDataHeader.get(groupPosition))
-                .get(childPosition);
+        return salaryReports.get(keys.get(groupPosition)).records.get(childPosition);
     }
 
     @Override
@@ -63,10 +61,10 @@ public class ExpandabelListAdapter extends BaseExpandableListAdapter {
 //Required for group list(We have Only One element i.e our child View)
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        HeaderModel headerTitle = (HeaderModel) getGroup(groupPosition);
-        String month  = headerTitle.getMonthName();
-        int totalamt = headerTitle.getTotalamt();
-        int creamt = headerTitle.getCreditedamt();
+        SalaryReport salaryReport = salaryReports.get(keys.get(groupPosition));
+        String month  = salaryReport.month;
+        String totalamt = ApplicationVariable.ACCOUNT_DATA.salary;
+        int creamt = (int) salaryReport.amount;
 
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context
@@ -74,6 +72,7 @@ public class ExpandabelListAdapter extends BaseExpandableListAdapter {
             convertView = infalInflater.inflate(R.layout.list_group, null);
         }
 
+        TextView type = convertView.findViewById(R.id.type1);
         TextView lblListHeader = convertView
                 .findViewById(R.id.lblListHeader);
         TextView totalmonthsum = convertView
@@ -82,7 +81,8 @@ public class ExpandabelListAdapter extends BaseExpandableListAdapter {
                 .findViewById(R.id.creditedamt);
 
         lblListHeader.setTypeface(null, Typeface.BOLD);
-        lblListHeader.setText(month);
+        lblListHeader.setText(modifyMonth(month));
+        type.setText(salaryReport.type);
         totalmonthsum.setText(""+totalamt);
         creditamt.setText(""+creamt);
 
@@ -112,7 +112,7 @@ public class ExpandabelListAdapter extends BaseExpandableListAdapter {
         TextView remark = convertView
                 .findViewById(R.id.salaryremarks);
 
-        month.setText(childmonth);
+        month.setText(modifyMonth(salaryModel.month));
         salamount.setText(""+amount);
         remark.setText(remarks);
 
@@ -122,5 +122,39 @@ public class ExpandabelListAdapter extends BaseExpandableListAdapter {
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
+    }
+
+    public String modifyMonth(String k) {
+        //for displaying as month
+        String s = String.valueOf(k.charAt(5)) + k.charAt(6);
+        String mahina = null;
+
+        if (s.equals("01"))
+            mahina = "JANUARY";
+        if (s.equals("02"))
+            mahina = "FEBRUARY";
+        if (s.equals("03"))
+            mahina = "MARCH";
+        if (s.equals("04"))
+            mahina = "APRIL";
+        if (s.equals("05"))
+            mahina = "MAY";
+        if (s.equals("06"))
+            mahina = "JUNE";
+        if (s.equals("07"))
+            mahina = "JULY";
+        if (s.equals("08"))
+            mahina = "AUGUST";
+        if (s.equals("09"))
+            mahina = "SEPTEMBER";
+        if (s.equals("10"))
+            mahina = "OCTOBER";
+        if (s.equals("11"))
+            mahina = "NOVEMBER";
+        if (s.equals("12"))
+            mahina = "DECEMBER";
+
+        mahina += "'" + k.charAt(0) + k.charAt(1) + k.charAt(2) + k.charAt(3);
+        return  mahina;
     }
 }
