@@ -40,6 +40,7 @@ public class TaskActivity extends AppCompatActivity implements MyAdapter.OnItemC
     Tasks taskobj, taskobj2, taskobj3, taskobj4;
     UpdateModel model1,model2,model3,model4;
     List<UpdateModel> updateModelList;
+    List<UpdateModel> updateModelListforIndividual;
 
     PuchaseModel pmodel1,pmodel2,pmodel3,pmodel4;
     List<PuchaseModel> puchaseModelList;
@@ -58,6 +59,7 @@ public class TaskActivity extends AppCompatActivity implements MyAdapter.OnItemC
         recyclerView = findViewById(R.id.recy);
         tasks = new ArrayList<>();
         updateModelList=new ArrayList<>();
+        updateModelListforIndividual = new ArrayList<>();
         puchaseModelList=new ArrayList<>();
         commentModelList=new ArrayList<>();
         tasksModels=new ArrayList<>();
@@ -224,7 +226,10 @@ public class TaskActivity extends AppCompatActivity implements MyAdapter.OnItemC
         String slip = tasks.get(position).getSlip_no();
         Intent intent = new Intent(this, DetailSctivity.class);
         Bundle bundle=new Bundle();
-        bundle.putSerializable("ARRAYLIST",(Serializable)tasks1.getUpdateModelList());
+        //func to create individual lists
+        createIndividualUpdateLists(tasks1.getUpdateModelList(),slip);
+
+        bundle.putSerializable("ARRAYLIST",(Serializable)updateModelListforIndividual);
         intent.putExtra("BUNDLE",bundle);
 
         Bundle bundle1=new Bundle();//for sending the whole list to another activity
@@ -235,12 +240,20 @@ public class TaskActivity extends AppCompatActivity implements MyAdapter.OnItemC
         bundle2.putSerializable("ARRAYLIST2",(Serializable)tasks1.getCommentModelList());
         intent.putExtra("BUNDLE2",bundle2);
 
-
         intent.putExtra("INFO",tasksModels.get(position));//send each object<Taskmodel> of the list to the next activity
 
 
 
         startActivity(intent);
+    }
+
+    private void createIndividualUpdateLists(List<UpdateModel> updateModelList,String slip) {
+        updateModelListforIndividual=new ArrayList<>();
+        for(UpdateModel updateModel: updateModelList){
+            if(updateModel.getSlipno().equals(slip)){
+                updateModelListforIndividual.add(updateModel);
+            }
+        }
     }
 
     @Override
