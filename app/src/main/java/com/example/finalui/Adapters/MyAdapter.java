@@ -99,6 +99,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                 }
             });
 
+            buttupdate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(mListener!=null){
+                        int pos = getAdapterPosition();
+                        if(pos!=RecyclerView.NO_POSITION){
+                            mListener.onItemClick(pos);
+                        }
+                    }
+                }
+            });
+
         }
     }
 }

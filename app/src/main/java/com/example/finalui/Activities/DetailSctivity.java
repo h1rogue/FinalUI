@@ -75,8 +75,9 @@ public class DetailSctivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
         tabLayout = findViewById(R.id.tabviewlay);
         tabLayout.setupWithViewPager(viewPager);
-
-
+        Intent intent1 = getIntent();
+        int val = (int) intent1.getIntExtra("pos",0);
+        viewPager.setCurrentItem(val);
 
     }
 }

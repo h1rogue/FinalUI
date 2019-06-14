@@ -241,9 +241,6 @@ public class TaskActivity extends AppCompatActivity implements MyAdapter.OnItemC
         intent.putExtra("BUNDLE2",bundle2);
 
         intent.putExtra("INFO",tasksModels.get(position));//send each object<Taskmodel> of the list to the next activity
-
-
-
         startActivity(intent);
     }
 
@@ -259,5 +256,24 @@ public class TaskActivity extends AppCompatActivity implements MyAdapter.OnItemC
     @Override
     public void onItemClick(int position) {
 
+        Intent intent = new Intent(this,DetailSctivity.class);
+        Bundle bundle = new Bundle();
+        Log.d("SLIP","onItemPositionClicked");
+        Tasks tasks1 = tasks.get(position);
+        String slip = tasks.get(position).getSlip_no();
+        Log.d("SLIP",slip);
+        createIndividualUpdateLists(tasks1.getUpdateModelList(),slip);
+
+        bundle.putSerializable("ARRAYLIST",(Serializable)updateModelListforIndividual);
+        intent.putExtra("BUNDLE",bundle);
+        intent.putExtra("pos",1);
+        intent.putExtra("INFO",tasksModels.get(position));
+        Bundle bundle1=new Bundle();//for sending the whole list to another activity
+        bundle1.putSerializable("ARRAYLIST1",(Serializable)tasks1.getPuchaseModelList());
+        intent.putExtra("BUNDLE1",bundle1);
+        Bundle bundle2=new Bundle();
+        bundle2.putSerializable("ARRAYLIST2",(Serializable)tasks1.getCommentModelList());
+        intent.putExtra("BUNDLE2",bundle2);
+        startActivity(intent);
     }
 }
