@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
+//vdhp/order/slip/get
 
 public class itemupdatefragment extends Fragment {
     View view;
@@ -34,6 +35,7 @@ public class itemupdatefragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         view = inflater.inflate(R.layout.item_updates,container,false);
         button = view.findViewById(R.id.floatbutton);
         Intent intent = getActivity().getIntent();
@@ -51,8 +53,6 @@ public class itemupdatefragment extends Fragment {
                 startActivityForResult(intent1,123);
             }
         });
-
-
 
         return view;
     }

@@ -1,5 +1,7 @@
 package com.example.finalui.Models;
 
+import com.example.finalui.TasksModel;
+
 import java.util.List;
 
 public class Tasks {
@@ -17,8 +19,9 @@ public class Tasks {
         private List<UpdateModel> updateModelList;
         private List<PuchaseModel> puchaseModelList;
         private List<CommentModel> commentModelList;
+        private List<TasksModel> tasksModelList;
 
-    public Tasks(String taskdate, String slip_no, String customer_name, String requirement, String people, String task, String time_assigned, String time_work, String task_duration, String status, List<UpdateModel> updateModelList, List<PuchaseModel> puchaseModelList, List<CommentModel> commentModelList) {
+    public Tasks(String taskdate, String slip_no, String customer_name, String requirement, String people, String task, String time_assigned, String time_work, String task_duration, String status, List<UpdateModel> updateModelList, List<PuchaseModel> puchaseModelList, List<CommentModel> commentModelList, List<TasksModel> tasksModel) {
         this.slip_no = slip_no;
         this.customer_name = customer_name;
         this.requirement = requirement;
@@ -32,7 +35,9 @@ public class Tasks {
         this.updateModelList = updateModelList;
         this.puchaseModelList = puchaseModelList;
         this.commentModelList = commentModelList;
+        this.tasksModelList=tasksModel;
     }
+
 
     public String getSlip_no() {
         return slip_no;
@@ -77,6 +82,9 @@ public class Tasks {
     public List<UpdateModel> getUpdateModelList() {
         return updateModelList;
     }
+    public List<TasksModel> getTasksModelList() {
+        return tasksModelList;
+    }
 
     public List<PuchaseModel> getPuchaseModelList() {
         return puchaseModelList;
@@ -88,6 +96,8 @@ public class Tasks {
     }
 
     public void setUpdateModelList(List<UpdateModel> updateModelList) { this.updateModelList = updateModelList; }
+
+    public void setTasksModelList(List<TasksModel> tasksModelList) { this.tasksModelList = tasksModelList; }
 
     public void setCommentModelList(List<CommentModel> commentModelList) { this.commentModelList = commentModelList; }
 
@@ -129,7 +139,9 @@ public class Tasks {
     }
 }
 
-
+//order/slip/update/get;
+//filter - slip_number
+//slip/purchase/get
 
 //  for (int i = 0; i < arrSize; ++i) {
 //        String key = a.getJSONObject(i).getString("month");

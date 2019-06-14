@@ -58,6 +58,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         holder.time_assigned.setText(taskobj.getTime_assigned());
         holder.timeofwork.setText(taskobj.getTime_work());
         holder.duration.setText(taskobj.getTask_duration());
+        holder.status.setText(taskobj.getStatus());
     }
 
     @Override
@@ -66,12 +67,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView slipno, date, customername, requirements, peoples, tasks, time_assigned, timeofwork, duration;
+        TextView slipno, status, date, customername, requirements, peoples, tasks, time_assigned, timeofwork, duration;
         Button buttstatus,buttupdate;
 
 
         public MyViewHolder(@NonNull View view) {
             super(view);
+            status = view.findViewById(R.id.textView8);
             slipno = view.findViewById(R.id.textView);
             date = view.findViewById(R.id.textView2);
             customername = view.findViewById(R.id.textView3);

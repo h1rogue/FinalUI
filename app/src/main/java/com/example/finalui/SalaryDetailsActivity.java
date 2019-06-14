@@ -70,7 +70,7 @@ public class SalaryDetailsActivity extends AppCompatActivity implements VvVolley
                         k, a.getJSONObject(i).getString("type"));
 
                 if (map.containsKey(k) && map.get(k) != null) {
-                    SalaryReport tempSalaryReport = map.get(k);
+                    SalaryReport tempSalaryReport = map.get(k);//tempSalary contains the previous salary of same key
                     ss = tempSalaryReport.amount + Float.parseFloat(salaryModel.amount);
                     tempSalaryReport.amount = ss;
                     tempSalaryReport.records.add(salaryModel);

@@ -74,7 +74,7 @@
             android:textColor="#000000"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView27" />
+            app:layout_constraintTop_toBottomOf="@+id/textView32" />
 
         <TextView
             android:id="@+id/textView29"
@@ -96,7 +96,7 @@
             android:text="Employee:"
             android:textColor="#000000"
             app:layout_constraintEnd_toStartOf="@+id/textView36"
-            app:layout_constraintTop_toBottomOf="@+id/textView29" />
+            app:layout_constraintTop_toBottomOf="@+id/textView32" />
 
         <TextView
             android:id="@+id/textView31"
@@ -116,6 +116,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            app:layout_constrainedWidth="true"
             android:text="furniture"
             app:layout_constraintEnd_toStartOf="@+id/textView29"
             app:layout_constraintHorizontal_bias="0.0"
@@ -140,7 +141,7 @@
             android:layout_marginTop="8dp"
             android:text="JhonnyLLB"
             app:layout_constraintStart_toEndOf="@+id/textView28"
-            app:layout_constraintTop_toBottomOf="@+id/textView27" />
+            app:layout_constraintTop_toBottomOf="@+id/textView32" />
 
         <TextView
             android:id="@+id/textView35"
@@ -160,7 +161,7 @@
             android:layout_marginEnd="8dp"
             android:text="Vaibhav"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView29" />
+            app:layout_constraintTop_toBottomOf="@+id/textView32" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 <com.google.android.material.tabs.TabLayout
     android:id="@+id/tabviewlay"
