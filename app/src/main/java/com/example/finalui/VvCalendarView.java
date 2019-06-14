@@ -347,10 +347,10 @@ public class VvCalendarView extends LinearLayout
             ((TextView)view).setTypeface(null, Typeface.NORMAL);
             ((TextView)view).setTextColor(Color.BLACK);
 
+            view.setBackgroundResource(0);
+
             if (month != currentDate.get(Calendar.MONTH) || year != currentDate.get(Calendar.YEAR))
             {
-//                Log.d("DHU", month + ":" + year + ", " +  currentDate.get(Calendar.MONTH) + " " + currentDate.get(Calendar.YEAR));
-                // if this day is outside current month, grey it out
                 ((TextView)view).setTextColor(getResources().getColor(R.color.greyed_out));
             }
             else if (day == today.getDate() && month == today.getMonth() && year == today.getYear() + 1900)
@@ -359,9 +359,12 @@ public class VvCalendarView extends LinearLayout
                 ((TextView)view).setTypeface(null, Typeface.BOLD);
                 ((TextView)view).setTextColor(getResources().getColor(R.color.today));
             }
+            if (day < today.getDate() && month <= today.getMonth() && year <= today.getYear() + 1900)
+            {
+                ((TextView) view).setTextColor(getResources().getColor(R.color.white));
+                view.setBackgroundResource(R.drawable.calendar_day_bg_red);
+            }
 
-            // if this day has an event, specify event image
-            view.setBackgroundResource(0);
             if (eventDays != null)
             {
                 for (ObjectAttendance eventDate : eventDays)
@@ -370,14 +373,18 @@ public class VvCalendarView extends LinearLayout
                             eventDate.date.getMonth() == month &&
                             eventDate.date.getYear() + 1900 == year)
                     {
-                        if(eventDate.punchIn){
+                        if(eventDate.punchIn && eventDate.punchOut){
+                            ((TextView) view).setTextColor(getResources().getColor(R.color.white));
+                            view.setBackgroundResource(R.drawable.subs_day_selected);
+                        }
+                        else if(eventDate.punchIn && !eventDate.punchOut){
                             ((TextView) view).setTextColor(getResources().getColor(R.color.black));
+                            view.setBackgroundResource(R.drawable.calendar_day_bg_yellow);
                         }
-                        if(eventDate.punchOut){
-                            ((TextView) view).setTextColor(getResources().getColor(R.color.todaySelected));
+                        else{
+                            ((TextView) view).setTextColor(getResources().getColor(R.color.white));
+                            view.setBackgroundResource(R.drawable.calendar_day_bg_red);
                         }
-                        Toast.makeText(getContext(), "qwerty", Toast.LENGTH_SHORT).show();
-                        view.setBackgroundResource(R.drawable.subs_day_selected);
                         break;
                     }
                 }

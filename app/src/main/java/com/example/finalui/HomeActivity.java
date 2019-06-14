@@ -28,6 +28,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,7 +64,9 @@ public class HomeActivity extends AppCompatActivity
     private Button emdet, punchin, punchout, report, compy;
     private LinearLayout linearLayout;
     private ProgressDialog progressDialog;
-    int pIN=0,pOUT=0;
+    ProgressBar progressBar;
+    static int hong=0;
+    static int kong=0;
 
     //attendance/get  --- filter-jsonObject of todaydate
     public static int constant = 0, closed = 0;
@@ -82,7 +85,6 @@ public class HomeActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Home");
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -90,6 +92,7 @@ public class HomeActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+        Log.d("DSKE","ONCREAATE");
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("loading...");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -114,13 +117,13 @@ public class HomeActivity extends AppCompatActivity
         if (ApplicationVariable.ACCOUNT_DATA.punchin == 0 && ApplicationVariable.ACCOUNT_DATA.punchout == 0) {
             Log.d("DSK_OPER","FIRST TIME RUNNING...");
             getAttendanceDetails();
-        } else if (ApplicationVariable.ACCOUNT_DATA.punchin == 2 && ApplicationVariable.ACCOUNT_DATA.punchout == 1) {
+        } else if(ApplicationVariable.ACCOUNT_DATA.punchin == 2 && ApplicationVariable.ACCOUNT_DATA.punchout == 1) {
             Log.d("DSK_OPER","PUNCHIN DONE PUNCHOUT LEFT");
             linearLayout.setBackgroundColor(getResources().getColor(R.color.open_color));
             markAttendance.setText(R.string.punched_in_home);
             punchin.setVisibility(GONE);
             punchout.setVisibility(View.VISIBLE);
-        } else if (ApplicationVariable.ACCOUNT_DATA.punchin == 2 && ApplicationVariable.ACCOUNT_DATA.punchout == 2) {
+        } else if (ApplicationVariable.ACCOUNT_DATA.punchin == 2 && ApplicationVariable.ACCOUNT_DATA.punchout == 2)  {
             Log.d("DSK_OPER","PUNCHOUT ALSO DONE!!");
             markAttendance.setText(R.string.punched_out_home);
             linearLayout.setBackgroundColor(getResources().getColor(R.color.colorAccent));
@@ -251,6 +254,20 @@ public class HomeActivity extends AppCompatActivity
             //start1.setVisibility(View.INVISIBLE);
         }
         Log.i("resume", String.valueOf(openOrClose));
+//        if(hong==1) {
+//            Log.d("DSK_OPER","PUNCHIN DONE PUNCHOUT LEFT");
+//            linearLayout.setBackgroundColor(getResources().getColor(R.color.open_color));
+//            markAttendance.setText(R.string.punched_in_home);
+//            punchin.setVisibility(GONE);
+//            punchout.setVisibility(View.VISIBLE);
+//        } else if (kong==1)  {
+//            Log.d("DSK_OPER","PUNCHOUT ALSO DONE!!");
+//            markAttendance.setText(R.string.punched_out_home);
+//            linearLayout.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+//            punchin.setVisibility(GONE);
+//            punchout.setVisibility(GONE);
+//        }
+        getAttendanceDetails();
         super.onResume();
     }
 
@@ -339,7 +356,7 @@ public class HomeActivity extends AppCompatActivity
     }
 
     private void doPunchOutrequest() {
-        pOUT=1;
+
         ApplicationVariable.ACCOUNT_DATA.punchout = 2;
         Log.d("DSK_OPER", "doPuchOutrequest");
         VvVolleyClass vvVolleyClass = new VvVolleyClass(this, getApplicationContext());
@@ -358,7 +375,7 @@ public class HomeActivity extends AppCompatActivity
     }
 
     private void doPuchInrequest() {
-        pIN=1;
+
         Log.d("DSK_OPER", "doPuchInrequest");
         VvVolleyClass vvVolleyClass = new VvVolleyClass(this, getApplicationContext());
         HashMap params = new HashMap<>();
@@ -427,6 +444,7 @@ public class HomeActivity extends AppCompatActivity
             punchin.setVisibility(GONE);
             punchout.setVisibility(View.VISIBLE);
             markAttendance.setText(R.string.punched_in_home);
+
         }
 
         else if(timein.length()>0 && timeout.length()>0){
@@ -451,6 +469,7 @@ public class HomeActivity extends AppCompatActivity
             ApplicationVariable.ACCOUNT_DATA.punchout = 1;
             linearLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             markAttendance.setText(R.string.mark_attendace);
+            punchin.setVisibility(View.VISIBLE);
         } else {
             timeIn = jsonObject.getJSONArray("data_rows").getJSONObject(0).getString("time_in");
             timeOut = jsonObject.getJSONArray("data_rows").getJSONObject(0).getString("time_out");

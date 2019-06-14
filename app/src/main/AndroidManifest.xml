@@ -17,6 +17,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:usesCleartextTraffic="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -36,31 +37,64 @@
         <activity
             android:name=".RideTrack.MapsActivity2"
             android:label="@string/title_activity_maps2"></activity>
-        <activity android:name=".RideTrack.RideCompleteDetailsActivity" />
-        <activity android:name=".SalaryDetailsActivity" />
-        <activity android:name=".Activities.AddUpdateActivity" />
-        <activity android:name=".Activities.DetailSctivity" />
-        <activity android:name=".Activities.TaskActivity" />
-        <activity android:name=".ChagePawwordActivity" />
-        <activity android:name=".CompanyDetailActivity" />
-        <activity android:name=".AttendanceActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".RideTrack.RideCompleteDetailsActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".SalaryDetailsActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.AddUpdateActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.DetailSctivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.TaskActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ChagePawwordActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".CompanyDetailActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".AttendanceActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".LoginActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
-        <activity android:name=".CompanyContactActivity" />
-        <activity android:name=".EditActivity" />
-        <activity android:name=".EmployeeDetActivity" />
-        <activity android:name=".RideTrack.Trips" />
-        <activity android:name=".RideTrack.MapsActivity" />
-        <activity android:name=".RideTrack.Details" />
+        <activity android:name=".CompanyContactActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".EditActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".EmployeeDetActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".RideTrack.Trips"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".RideTrack.MapsActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".RideTrack.Details"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".HomeActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
 
         <service
             android:name=".RideTrack.LocationUpdatesService"
