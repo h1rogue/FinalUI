@@ -44,12 +44,12 @@ public class TaskActivity extends AppCompatActivity implements MyAdapter.OnItemC
 
     PuchaseModel pmodel1,pmodel2,pmodel3,pmodel4;
     List<PuchaseModel> puchaseModelList;
+    List<PuchaseModel> purchaseModelListforIndividual;
 
     CommentModel cmodel1,cmodel2,cmodel3,cmodel4,cmoddel5;
     List<CommentModel> commentModelList;
     List<TasksModel> tasksModels;
-    HashMap<String, List<UpdateModel>> map1;
-    List<List<UpdateModel>> lists;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -60,6 +60,7 @@ public class TaskActivity extends AppCompatActivity implements MyAdapter.OnItemC
         tasks = new ArrayList<>();
         updateModelList=new ArrayList<>();
         updateModelListforIndividual = new ArrayList<>();
+        purchaseModelListforIndividual = new ArrayList<>();
         puchaseModelList=new ArrayList<>();
         commentModelList=new ArrayList<>();
         tasksModels=new ArrayList<>();
@@ -83,33 +84,33 @@ public class TaskActivity extends AppCompatActivity implements MyAdapter.OnItemC
 //        updateModelList.add(model2);
 //        updateModelList.add(model3);
 //        updateModelList.add(model4);
-
-        pmodel1=new PuchaseModel("123", "11/11/11", "we", "23/11",
-                "2300", "OK", "done");
-        pmodel2=new PuchaseModel("111", "21/11/11", "were", "23/122",
-                "3300", "NOT OK", "NOT done");
-        pmodel3=new PuchaseModel("111", "21/11/11", "were", "23/122",
-                "3300", "NOT OK", "NOT done");
-        pmodel4=new PuchaseModel("111", "21/11/11", "were", "23/122",
-                "3300", "NOT OK", "NOT done");
-
-        puchaseModelList.add(pmodel1);
-        puchaseModelList.add(pmodel2);
-        puchaseModelList.add(pmodel3);
-        puchaseModelList.add(pmodel4);
-
-
-        cmodel1=new CommentModel("Hirak", "I am humungasour", "04:09pm");
-        cmodel2=new CommentModel("Gagan", "I am heatblast.", "09:00am");
-        cmodel3=new CommentModel("Vaibhav", "I am DiamondHead", "23:99PM");
-        cmodel4=new CommentModel("Anushree", "I am Accelarator", "23:99PM");
-        cmoddel5=new CommentModel("Vaibhav", "I am Ghostfreak", "23:99PM");
-
-        commentModelList.add(cmodel1);
-        commentModelList.add(cmodel2);
-        commentModelList.add(cmodel3);
-        commentModelList.add(cmodel4);
-        commentModelList.add(cmoddel5);
+//
+//        pmodel1=new PuchaseModel("123", "11/11/11", "we", "23/11",
+//                "2300", "OK", "done");
+//        pmodel2=new PuchaseModel("111", "21/11/11", "were", "23/122",
+//                "3300", "NOT OK", "NOT done");
+//        pmodel3=new PuchaseModel("111", "21/11/11", "were", "23/122",
+//                "3300", "NOT OK", "NOT done");
+//        pmodel4=new PuchaseModel("111", "21/11/11", "were", "23/122",
+//                "3300", "NOT OK", "NOT done");
+//
+//        puchaseModelList.add(pmodel1);
+//        puchaseModelList.add(pmodel2);
+//        puchaseModelList.add(pmodel3);
+//        puchaseModelList.add(pmodel4);
+//
+//
+//        cmodel1=new CommentModel("Hirak", "I am humungasour", "04:09pm");
+//        cmodel2=new CommentModel("Gagan", "I am heatblast.", "09:00am");
+//        cmodel3=new CommentModel("Vaibhav", "I am DiamondHead", "23:99PM");
+//        cmodel4=new CommentModel("Anushree", "I am Accelarator", "23:99PM");
+//        cmoddel5=new CommentModel("Vaibhav", "I am Ghostfreak", "23:99PM");
+//
+//        commentModelList.add(cmodel1);
+//        commentModelList.add(cmodel2);
+//        commentModelList.add(cmodel3);
+//        commentModelList.add(cmodel4);
+//        commentModelList.add(cmoddel5);
 
 //        taskobj = new Tasks("12/03/19", "#2234", "Hirak Borah",
 //                "Furniture Repairement",
@@ -150,7 +151,7 @@ public class TaskActivity extends AppCompatActivity implements MyAdapter.OnItemC
         params.put("filter", new ArrayList<>().toString());
         vvVolleyClass.makeRequest("http://admin.doorhopper.in/api/vdhp/order/slip/get", params);
         vvVolleyClass.makeRequest("http://admin.doorhopper.in/api/vdhp/order/slip/update/get", params);
-
+        vvVolleyClass.makeRequest("http://admin.doorhopper.in/api/vdhp/order/slip/purchase/get", params);
     }
 
     @Override
@@ -172,6 +173,20 @@ public class TaskActivity extends AppCompatActivity implements MyAdapter.OnItemC
                             a.getJSONObject(i).getString("department"), a.getJSONObject(i).getString("employee"),
                             a.getJSONObject(i).isNull("remarks") ? "N/A" : a.getJSONObject(i).getString("remarks"));
                     updateModelList.add(updateModel);
+                }
+            }
+
+            if(o.getString("responseFor").equals("order/slip/payment/get"))//for updates
+            {
+                for (int i = 0; i < a.length(); ++i) {//for accessing the json array "data_rows"
+
+                    //Log.d("task",a.getJSONObject(i).isNull("people")?"N/A":a.getJSONObject(i).getString("people"));//to check if element named "people" is there in the data_rows array or not.
+
+                    PuchaseModel puchaseModel = new PuchaseModel(a.getJSONObject(i).getString("slip_no"),
+                            a.getJSONObject(i).getString("date"), a.getJSONObject(i).getString("vendor"),
+                            a.getJSONObject(i).getString("invoice"),a.getJSONObject(i).getString("amount"),
+                            a.getJSONObject(i).getString("payment"),a.getJSONObject(i).getString("remarks"));
+                    puchaseModelList.add(puchaseModel);
                 }
             }
             //for tasks
@@ -199,7 +214,7 @@ public class TaskActivity extends AppCompatActivity implements MyAdapter.OnItemC
                             a.getJSONObject(i).isNull("action_time") ? "N/A" : a.getJSONObject(i).getString("action_time"),
                             a.getJSONObject(i).isNull("duration") ? "N/A" : a.getJSONObject(i).getString("duration"),
                             a.getJSONObject(i).getString("current_status"),
-                            updateModelList, new ArrayList<>(), new ArrayList<>(), tasksModels);
+                            updateModelList, puchaseModelList, new ArrayList<>(), tasksModels);
                     tasks.add(tasks1);
                 }
 
@@ -233,7 +248,10 @@ public class TaskActivity extends AppCompatActivity implements MyAdapter.OnItemC
         intent.putExtra("BUNDLE",bundle);
 
         Bundle bundle1=new Bundle();//for sending the whole list to another activity
-        bundle1.putSerializable("ARRAYLIST1",(Serializable)tasks1.getPuchaseModelList());
+        //func to create individual purchase list
+        createIndividualPurchaseLists(tasks1.getPuchaseModelList(),slip);
+
+        bundle1.putSerializable("ARRAYLIST1",(Serializable)purchaseModelListforIndividual);
         intent.putExtra("BUNDLE1",bundle1);
 
         Bundle bundle2=new Bundle();
@@ -249,6 +267,15 @@ public class TaskActivity extends AppCompatActivity implements MyAdapter.OnItemC
         for(UpdateModel updateModel: updateModelList){
             if(updateModel.getSlipno().equals(slip)){
                 updateModelListforIndividual.add(updateModel);
+            }
+        }
+    }
+    private void createIndividualPurchaseLists(List<PuchaseModel> puchaseModelList,String slip) {
+        purchaseModelListforIndividual =new ArrayList<>();
+        for(PuchaseModel puchaseModel: puchaseModelList){
+            if(puchaseModel.getSlipno().equals(slip)){
+                purchaseModelListforIndividual.add(puchaseModel);
+                Log.d("pppp",puchaseModel.getSlipno());
             }
         }
     }
