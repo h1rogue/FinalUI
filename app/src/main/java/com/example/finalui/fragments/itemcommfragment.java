@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,14 +16,22 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.finalui.Adapters.MyAdapter4;
+import com.example.finalui.ApplicationVariable;
 import com.example.finalui.Models.CommentModel;
 import com.example.finalui.R;
 import com.example.finalui.Adapters.MyAdapter4;
 import com.example.finalui.Models.CommentModel;
 import com.example.finalui.R;
+import com.example.finalui.TasksModel;
+import com.example.finalui.VvVolleyClass;
+import com.google.gson.JsonObject;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 public class itemcommfragment extends Fragment {
@@ -33,6 +42,7 @@ public class itemcommfragment extends Fragment {
     EditText comment;
     Button button;
     List<CommentModel> commentModelList;
+    String slip_no;
 
     public itemcommfragment(){}
 
@@ -43,6 +53,11 @@ public class itemcommfragment extends Fragment {
         Intent intent = getActivity().getIntent();
         Bundle args = intent.getBundleExtra("BUNDLE2");
         commentModelList=new ArrayList<>();
+
+
+        Intent intent2 = getActivity().getIntent();
+        TasksModel tasksModel = (TasksModel) intent2.getSerializableExtra("INFO");
+        slip_no=  tasksModel.getSlip_no();
 
         ArrayList<CommentModel> object = (ArrayList<CommentModel>) args.getSerializable("ARRAYLIST2");
         commentModelList=object;
@@ -68,14 +83,25 @@ public class itemcommfragment extends Fragment {
         }
         else
         {
-            String str=comment.getText().toString().trim();
-            String nam="Gagan";
-            String time = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
+            String commentxt = comment.getText().toString().trim();
+            sendtheComment();
             comment.setText("");
-            CommentModel commentModel= new CommentModel(nam, str,time);
-            commentModelList.add(commentModel);
-            myAdapter4.notifyDataSetChanged();
-
         }
+    }
+
+    private void sendtheComment() {
+        getCommentsfromJson();
+    }
+
+    private void getCommentsfromJson() {
+        VvVolleyClass vvVolleyClass = new VvVolleyClass(getActivity(),getActivity().getApplicationContext());
+        HashMap params = new HashMap<>();
+        params.put("phone", ApplicationVariable.ACCOUNT_DATA.contact);
+        params.put("token", ApplicationVariable.ACCOUNT_DATA.token);
+        params.put("regId", ApplicationVariable.ACCOUNT_DATA.reg_id);
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("slip_no",slip_no);
+        params.put("filter", jsonObject);
+        vvVolleyClass.makeRequest("http://admin.doorhopper.in/api/vdhp/order/slip/comment/get", params);
     }
 }

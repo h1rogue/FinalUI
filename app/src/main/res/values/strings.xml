@@ -115,5 +115,29 @@
     <string name="punched_in_home">PUNCHED IN</string>
     <string name="punched_out_home">PUNCHED OUT</string>
     <string name="mark_attendace">MARK ATTENDANCE</string>
+    <string name="active">active</string>
+    <string name="archieve">archieve</string>
+
+    <string-array name="drop_down">
+        <item>Slip no.</item>
+        <item>Priority</item>
+        <item>Slip Date</item>
+        <item>Customer</item>
+        <item>Requirement</item>
+        <item>Vendor</item>
+        <item>Current Status</item>
+        <item>Next Date</item>
+        <item>Current Department</item>
+        <item>Current Employee</item>
+    </string-array>
+
+    <string-array name="drop_down2">
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>40</item>
+        <item>50</item>
+
+    </string-array>
 
 </resources>

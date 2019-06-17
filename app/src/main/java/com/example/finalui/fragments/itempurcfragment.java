@@ -18,8 +18,8 @@ import com.example.finalui.R;
 import java.util.ArrayList;
 
 public class itempurcfragment extends Fragment {
-   public itempurcfragment(){}
-View view;
+    public itempurcfragment(){}
+    View view;
     RecyclerView recyclerView1;
     MyAdapter3 myAdapter3;
 

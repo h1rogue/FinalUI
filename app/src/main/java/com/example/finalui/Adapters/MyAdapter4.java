@@ -39,9 +39,9 @@ public class MyAdapter4 extends RecyclerView.Adapter<MyAdapter4.MyViewHolder> {
 
         CommentModel taskobj = commentModelList.get(position);
 
-        holder.time.setText(taskobj.getTime());
-        holder.name.setText(taskobj.getName());
-        holder.msg.setText(taskobj.getMessage());
+        holder.time.setText(taskobj.getcommented_on());
+        holder.name.setText(taskobj.getstaff());
+        holder.msg.setText(taskobj.getcomment());
     }
 
     @Override
