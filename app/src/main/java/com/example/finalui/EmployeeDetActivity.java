@@ -5,7 +5,11 @@ import android.content.Intent;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -40,51 +44,20 @@ public class EmployeeDetActivity extends AppCompatActivity{
         dob = findViewById(R.id.emplyee_dob);
         sal = findViewById(R.id.salary);
         contact = findViewById(R.id.emplyee_contact);
-        changepass = findViewById(R.id.button4);
+  //      changepass = findViewById(R.id.button4);
 
         gettheData();
 
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(EmployeeDetActivity.this, EditActivity.class);
-//                intent.putExtra("EID", emp_id.getText().toString().trim());
-//                intent.putExtra("ENAME", ename.getText().toString().trim());
-//                intent.putExtra("EADD", eadd.getText().toString().trim());
-//                intent.putExtra("ECON", contact.getText().toString().trim());
-//                intent.putExtra("EBLOOD", blood_group.getText().toString().trim());
-//                intent.putExtra("DOB", dob.getText().toString().trim());
-//                startActivityForResult(intent, REQUEST_CODE);
-//            }
-//        });
-
-
-        changepass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(EmployeeDetActivity.this, ChagePawwordActivity.class);
-                startActivity(intent);
-            }
-        });
     }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
-            emp_id.setText(data.getStringExtra("emp_id"));
-            ename.setText(data.getStringExtra("ENAME"));
-            eadd.setText(data.getStringExtra("EADD"));
-            contact.setText(data.getStringExtra("ECON"));
-            blood_group.setText(data.getStringExtra("EBLOOD"));
-            dob.setText(data.getStringExtra("DOB"));
-        }
-    }
+
     private void gettheData() {
         emp_id.setText(ApplicationVariable.ACCOUNT_DATA.emp_id);
         ename.setText(ApplicationVariable.ACCOUNT_DATA.name);
         eadd.setText(ApplicationVariable.ACCOUNT_DATA.address);
         contact.setText(ApplicationVariable.ACCOUNT_DATA.contact);
         blood_group.setText(ApplicationVariable.ACCOUNT_DATA.blood_group);
-        dob.setText(ApplicationVariable.ACCOUNT_DATA.dob);
-        sal.setText(ApplicationVariable.ACCOUNT_DATA.salary);
+        dob.setText("DOB: "+ApplicationVariable.ACCOUNT_DATA.dob);
+        sal.setText("Salary: "+ApplicationVariable.ACCOUNT_DATA.salary);
     }
+
 }

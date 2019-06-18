@@ -68,16 +68,18 @@ public class HomeActivity extends AppCompatActivity
     static int hong=0;
     static int kong=0;
     public static HomeActivity fa2;
-
     //attendance/get  --- filter-jsonObject of todaydate
     public static int constant = 0, closed = 0;
     public static boolean openOrClose;
     public static int vv = 0, cdd = 0;
     public static TextView dist;
     public static Chronometer dura;
-
-
     public static Button stop, pause1, resume, start1, trips;
+
+    // order/slip/update/create
+   // params-  new_data_row -->slip_no,priority,date,remarks,status,department,employee,next_update_date
+    //staff     vdhp/staff/get
+    //department vdhp/department/get
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,7 +111,6 @@ public class HomeActivity extends AppCompatActivity
         emdet = findViewById(R.id.button5);
         compy = findViewById(R.id.compdet);
         linearLayout = findViewById(R.id.colourLin);
-
         emipd.setText(ApplicationVariable.ACCOUNT_DATA.emp_id);
         empname.setText(ApplicationVariable.ACCOUNT_DATA.name);
         empdes.setText(ApplicationVariable.ACCOUNT_DATA.role);
@@ -132,9 +133,7 @@ public class HomeActivity extends AppCompatActivity
             punchin.setVisibility(GONE);
             punchout.setVisibility(GONE);
         }
-
         Log.d("create","pppp");
-
 
         emdet.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -259,24 +258,10 @@ public class HomeActivity extends AppCompatActivity
             //start1.setVisibility(View.INVISIBLE);
         }
         Log.i("resume", String.valueOf(openOrClose));
-//        if(hong==1) {
-//            Log.d("DSK_OPER","PUNCHIN DONE PUNCHOUT LEFT");
-//            linearLayout.setBackgroundColor(getResources().getColor(R.color.open_color));
-//            markAttendance.setText(R.string.punched_in_home);
-//            punchin.setVisibility(GONE);
-//            punchout.setVisibility(View.VISIBLE);
-//        } else if (kong==1)  {
-//            Log.d("DSK_OPER","PUNCHOUT ALSO DONE!!");
-//            markAttendance.setText(R.string.punched_out_home);
-//            linearLayout.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-//            punchin.setVisibility(GONE);
-//            punchout.setVisibility(GONE);
-//        }
+
         getAttendanceDetails();
         super.onResume();
     }
-
-    //gagan
 
     @Override
     protected void onPause() {
@@ -497,7 +482,6 @@ public class HomeActivity extends AppCompatActivity
                 linearLayout.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                 markAttendance.setText(R.string.punched_out_home);
             }
-
         }
 
     }

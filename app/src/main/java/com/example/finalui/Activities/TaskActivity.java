@@ -34,6 +34,8 @@ import com.example.finalui.SalaryReport;
 import com.example.finalui.TasksModel;
 import com.example.finalui.VvVolleyClass;
 import com.example.finalui.VvVolleyInterface;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -94,7 +96,6 @@ public class TaskActivity extends AppCompatActivity implements MyAdapter.OnItemC
         hasmap.put("Next Date",pair8);
         hasmap.put("Current Department",pair9);
         hasmap.put("Current Employee",pair10);
-
         recyclerView = findViewById(R.id.recy);
         activebutt=findViewById(R.id.button6);
         archievebutt=findViewById(R.id.button8);
@@ -104,8 +105,6 @@ public class TaskActivity extends AppCompatActivity implements MyAdapter.OnItemC
         offsettext=findViewById(R.id.textView16);
         offsetsetbutt=findViewById(R.id.button11);
         offsetbeforebutt=findViewById(R.id.button12);
-
-
         //ArrayAdapter for spinner 1
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this
                 ,R.array.drop_down,
@@ -113,8 +112,6 @@ public class TaskActivity extends AppCompatActivity implements MyAdapter.OnItemC
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
-
-
         // ArrayAdapter for spinner 2
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this
                 ,R.array.drop_down2,
@@ -122,7 +119,6 @@ public class TaskActivity extends AppCompatActivity implements MyAdapter.OnItemC
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner2.setAdapter(adapter2);
         spinner2.setOnItemSelectedListener(this);
-
         searchView=findViewById(R.id.searchView);
         updateModelList=new ArrayList<>();
         updateModelListforIndividual = new ArrayList<>();
@@ -135,7 +131,6 @@ public class TaskActivity extends AppCompatActivity implements MyAdapter.OnItemC
         Log.d("damm",data_row_size+"");
         getUpdateadPurchaseComment();
     }
-
     private void getUpdateadPurchaseComment() {
         VvVolleyClass vvVolleyClass = new VvVolleyClass(this, getApplicationContext());
         HashMap params = new HashMap<>();
@@ -146,7 +141,6 @@ public class TaskActivity extends AppCompatActivity implements MyAdapter.OnItemC
         vvVolleyClass.makeRequest("http://admin.doorhopper.in/api/vdhp/order/slip/update/get", params);
         vvVolleyClass.makeRequest("http://admin.doorhopper.in/api/vdhp/order/slip/purchase/get", params);
         vvVolleyClass.makeRequest("http://admin.doorhopper.in/api/vdhp/order/slip/comment/get", params);
-
     }
 
     private void getTaskJson() {
@@ -328,7 +322,7 @@ public class TaskActivity extends AppCompatActivity implements MyAdapter.OnItemC
         bundle.putSerializable("ARRAYLIST",(Serializable)updateModelListforIndividual);
         intent.putExtra("BUNDLE",bundle);
         intent.putExtra("pos",1);
-        intent.putExtra("INFO",tasksModels.get(position));
+        intent.putExtra("INFO",tasks1.getTasksModel());
         Bundle bundle1=new Bundle();//for sending the whole list to another activity
         bundle1.putSerializable("ARRAYLIST1",(Serializable)purchaseModelListforIndividual);
         intent.putExtra("BUNDLE1",bundle1);
@@ -383,8 +377,45 @@ public class TaskActivity extends AppCompatActivity implements MyAdapter.OnItemC
 
     public void activeButtonOnClick(View view) {
 
+       String[] arr = {"initiated","follow","site_visit","quotation","quotation_follow"
+       ,"work_due","work_progress","invoice","payment","feedback"};
+       JsonArray jsonArray = new JsonArray();
+       jsonArray.add("initiated");
+        jsonArray.add("follow");
+        jsonArray.add("site_visit");
+        jsonArray.add("quotation");
+        jsonArray.add("quotation_follow");
+        jsonArray.add("work_due");
+        jsonArray.add("work_progress");
+        jsonArray.add("invoice");
+        jsonArray.add("payment");
+        jsonArray.add("feedback");
+        afterbuttonClicked(jsonArray);
     }
 
     public void archieveButtonOnClick(View view) {
+
+        JsonArray arr = new JsonArray();
+        arr.add("cancelled");
+        arr.add("completed");
+        afterbuttonClicked(arr);
     }
+
+    private void afterbuttonClicked(JsonArray arr) {
+        VvVolleyClass vvVolleyClass = new VvVolleyClass(this, getApplicationContext());
+        HashMap params = new HashMap<>();
+        params.put("phone", ApplicationVariable.ACCOUNT_DATA.contact);
+        params.put("token", ApplicationVariable.ACCOUNT_DATA.token);
+        params.put("regId", ApplicationVariable.ACCOUNT_DATA.reg_id);
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.add("current_status",arr);
+        params.put("filter", jsonObject.toString());
+        vvVolleyClass.makeRequest("http://admin.doorhopper.in/api/vdhp/order/slip/get", params);
+
+//        vvVolleyClass.makeRequest("http://admin.doorhopper.in/api/vdhp/order/slip/update/get", params);
+//        vvVolleyClass.makeRequest("http://admin.doorhopper.in/api/vdhp/order/slip/purchase/get", params);
+//        vvVolleyClass.makeRequest("http://admin.doorhopper.in/api/vdhp/order/slip/comment/get", params);
+
+    }
+
 }

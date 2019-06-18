@@ -7,20 +7,23 @@
     tools:context=".EmployeeDetActivity"
     android:orientation="vertical">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp">
+    <!--<androidx.constraintlayout.widget.ConstraintLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
 
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="15dp"
-            android:text="@string/change_password"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--<Button-->
+            <!--android:id="@+id/button4"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:layout_marginEnd="8dp"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:text="@string/change_password"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="parent" -->
+            <!--android:visibility="gone"/>-->
+    <!--</androidx.constraintlayout.widget.ConstraintLayout>-->
 
 
 
@@ -30,7 +33,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     <androidx.cardview.widget.CardView
+        android:layout_margin="5dp"
         android:padding="5dp"
+        app:cardCornerRadius="7dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -56,30 +61,19 @@
                 android:layout_height="0.2dp"
                 android:layout_marginTop="30dp"
                 android:background="@android:color/black"/>
-            <TextView
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:paddingStart="5dp"
-                android:paddingLeft="5dp"
-                android:paddingEnd="5dp"
-                android:text="@string/employee_id"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
 
             <TextView
-                android:tag="1"
                 android:id="@+id/emplyee_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="5dp"
-                android:paddingLeft="5dp"
-                android:paddingEnd="5dp"
-                android:text="@string/employee_id"
+                android:layout_marginTop="8dp"
                 android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+                android:text="@string/employee_id"
                 android:textColor="@color/mdtp_dark_gray"
-                android:textSize="16sp" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <View
                 android:layout_width="match_parent"
@@ -88,46 +82,24 @@
                 android:background="@android:color/black"/>
 
             <TextView
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:paddingStart="5dp"
-                android:paddingLeft="5dp"
-                android:paddingEnd="5dp"
-                android:textColor="@color/black"
-                android:text="@string/employee_name"
-                android:textSize="18sp" />
-
-            <TextView
-                android:tag="2"
                 android:id="@+id/emplyee_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
                 android:paddingStart="5dp"
                 android:paddingLeft="5dp"
                 android:paddingEnd="5dp"
-                android:layout_marginBottom="5dp"
+                android:tag="2"
                 android:text="@string/employee_name"
                 android:textColor="@color/mdtp_dark_gray"
-                android:textSize="16sp" />
+                android:textSize="16dp" />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.2dp"
                 android:layout_marginTop="5dp"
                 android:background="@android:color/black"/>
-
-            <TextView
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:paddingStart="5dp"
-                android:paddingLeft="5dp"
-                android:paddingEnd="5dp"
-                android:text="@string/date_of_birth"
-                android:textSize="18sp"
-                android:textColor="@color/black"/>
 
             <TextView
                 android:tag="3"
@@ -135,6 +107,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="5dp"
+                android:layout_marginTop="8dp"
                 android:paddingLeft="5dp"
                 android:paddingEnd="5dp"
                 android:text="@string/date_of_birth"
@@ -158,7 +131,8 @@
                 android:paddingEnd="5dp"
                 android:text="@string/address"
                 android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:tag="4"
@@ -187,7 +161,8 @@
                 android:paddingEnd="5dp"
                 android:text="@string/contact"
                 android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:tag="5"
@@ -217,8 +192,9 @@
                 android:paddingLeft="5dp"
                 android:paddingEnd="5dp"
                 android:text="@string/blood_group"
+                android:textColor="@color/black"
                 android:textSize="18sp"
-                android:textColor="@color/black"/>
+                android:textStyle="bold" />
             <TextView
                 android:tag="6"
                 android:id="@+id/emplyee_bloodgrp"
@@ -236,30 +212,21 @@
                 android:layout_height="0.2dp"
                 android:layout_marginTop="5dp"
                 android:background="@android:color/black"/>
-            <TextView
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:paddingStart="5dp"
-                android:paddingLeft="5dp"
-                android:paddingEnd="5dp"
-                android:text="@string/employee_salary"
-                android:textSize="18sp"
-                android:textColor="@color/black"/>
 
             <TextView
-                android:tag="7"
                 android:id="@+id/salary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/mdtp_dark_gray"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="10dp"
                 android:paddingStart="5dp"
                 android:paddingLeft="5dp"
                 android:paddingEnd="5dp"
+                android:tag="7"
                 android:text="@string/employee_salary"
+                android:textColor="@color/mdtp_dark_gray"
                 android:textSize="16sp"
-                android:layout_marginBottom="10dp"/>
+                android:textStyle="bold" />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.2dp"

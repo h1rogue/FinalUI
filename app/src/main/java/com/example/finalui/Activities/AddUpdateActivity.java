@@ -6,6 +6,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,8 +17,10 @@ import com.example.finalui.fragments.itemupdatefragment;
 
 public class AddUpdateActivity extends AppCompatActivity {
 
-    private EditText id,slipno,updatedate,status,nextupdatedate,department,employee,updateby;
+    private EditText id,nextupdatedate,updateby;
+    private TextView slipno,updatedate;
     private Button button;
+    Spinner status,department,employee;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,36 +48,17 @@ public class AddUpdateActivity extends AppCompatActivity {
         if(TextUtils.isEmpty(id.getText().toString().trim())){
             id.setError("field cannot be empty");
         }
-       else if(TextUtils.isEmpty(slipno.getText().toString().trim())){
-            slipno.setError("field cannot be empty");
-        }
-       else if(TextUtils.isEmpty(updatedate.getText().toString().trim())){
-            updatedate.setError("field cannot be empty");
-        }
-       else if(TextUtils.isEmpty(status.getText().toString().trim())){
-            status.setError("field cannot be empty");
-        }
+
         else if(TextUtils.isEmpty(nextupdatedate.getText().toString().trim())){
             nextupdatedate.setError("field cannot be empty");
         }
-       else if(TextUtils.isEmpty(department.getText().toString().trim())){
-            department.setError("field cannot be empty");
-        }
-       else if(TextUtils.isEmpty(employee.getText().toString().trim())){
-            employee.setError("field cannot be empty");
-        }
+
        else if(TextUtils.isEmpty(updateby.getText().toString().trim())){
             updateby.setError("field cannot be empty");
         }
        else{
-            Intent intent = new Intent(AddUpdateActivity.this, itemupdatefragment.class);
-            UpdateModel updateModel = new UpdateModel(id.getText().toString().trim(),
-                    slipno.getText().toString().trim(),updatedate.getText().toString().trim(),
-                    status.getText().toString().trim(),nextupdatedate.getText().toString().trim(),
-                    department.getText().toString().trim(),employee.getText().toString().trim(),
-                    updateby.getText().toString().trim());
-            intent.putExtra("Object",updateModel);
-            setResult(RESULT_OK,intent);
+
+
             finish();
         }
     }
