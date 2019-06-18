@@ -5,17 +5,21 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.List;
 
 public class RideDetailClass {
+    String start_id;
+    String end_id;
     String tripname;
-    String duration;
+    float duration;
     float avgspeed;
     float distance;
     List<LatLng> track;
 
-    public RideDetailClass(String tripname, String duration, float avgspeed, float distance, List<LatLng> track) {
+    public RideDetailClass(String start_id, String end_id, String tripname, float duration, float avgspeed, float distance, List<LatLng> track) {
         this.tripname = tripname;
         this.duration = duration;
         this.avgspeed = avgspeed;
         this.distance = distance;
+        this.start_id = start_id;
+        this.end_id = end_id;
         this.track = track;
     }
 
@@ -27,11 +31,27 @@ public class RideDetailClass {
         this.tripname = tripname;
     }
 
-    public String getDuration() {
+    public void setEnd_id(String end_id) {
+        this.end_id = end_id;
+    }
+
+    public String getEnd_id() {
+        return end_id;
+    }
+
+    public String getStart_id() {
+        return start_id;
+    }
+
+    public void setStart_id(String start_id) {
+        this.start_id = start_id;
+    }
+
+    public float getDuration() {
         return duration;
     }
 
-    public void setDuration(String duration) {
+    public void setDuration(float duration) {
         this.duration = duration;
     }
 

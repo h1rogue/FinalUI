@@ -1,9 +1,22 @@
 package com.example.finalui.RideTrack;
 
-public class TripData {
+import java.io.Serializable;
+
+public class TripData implements Serializable {
+    public String id;
     public String name;
     public float distance;
     public String duration;
+
+    public TripData() {
+    }
+
+    public TripData(String id, String name, float distance, String duration) {
+        this.id = id;
+        this.name = name;
+        this.distance = distance;
+        this.duration = duration;
+    }
 
     public String getName() {
         return name;

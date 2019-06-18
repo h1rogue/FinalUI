@@ -46,18 +46,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/black"
                 android:text="@string/employee_details"
-                android:textSize="23sp" />
-
+                android:textSize="25sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:layout_marginTop="30dp"
+                android:background="@android:color/black"/>
             <TextView
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="10dp"
                 android:paddingStart="5dp"
                 android:paddingLeft="5dp"
                 android:paddingEnd="5dp"
                 android:text="@string/employee_id"
+                android:textColor="@color/black"
                 android:textSize="18sp" />
 
             <TextView
@@ -69,19 +77,27 @@
                 android:paddingLeft="5dp"
                 android:paddingEnd="5dp"
                 android:text="@string/employee_id"
-                android:textColor="#000000"
-                android:textSize="22sp" />
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/mdtp_dark_gray"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/black"/>
 
             <TextView
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="10dp"
                 android:paddingStart="5dp"
                 android:paddingLeft="5dp"
                 android:paddingEnd="5dp"
+                android:textColor="@color/black"
                 android:text="@string/employee_name"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:tag="2"
@@ -91,10 +107,15 @@
                 android:paddingStart="5dp"
                 android:paddingLeft="5dp"
                 android:paddingEnd="5dp"
+                android:layout_marginBottom="5dp"
                 android:text="@string/employee_name"
-                android:textColor="#000000"
-                android:textSize="22sp" />
-
+                android:textColor="@color/mdtp_dark_gray"
+                android:textSize="16sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/black"/>
 
             <TextView
 
@@ -105,7 +126,8 @@
                 android:paddingLeft="5dp"
                 android:paddingEnd="5dp"
                 android:text="@string/date_of_birth"
-                android:textSize="20sp" />
+                android:textSize="18sp"
+                android:textColor="@color/black"/>
 
             <TextView
                 android:tag="3"
@@ -116,8 +138,15 @@
                 android:paddingLeft="5dp"
                 android:paddingEnd="5dp"
                 android:text="@string/date_of_birth"
-                android:textColor="#000000"
-                android:textSize="22sp" />
+                android:textSize="16sp"
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/mdtp_dark_gray"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/black"/>
 
             <TextView
 
@@ -128,7 +157,8 @@
                 android:paddingLeft="5dp"
                 android:paddingEnd="5dp"
                 android:text="@string/address"
-                android:textSize="20sp" />
+                android:textColor="@color/black"
+                android:textSize="18sp" />
 
             <TextView
                 android:tag="4"
@@ -139,8 +169,14 @@
                 android:paddingLeft="5dp"
                 android:paddingEnd="5dp"
                 android:text="@string/address"
-                android:textColor="#000000"
-                android:textSize="22sp" />
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/mdtp_dark_gray"
+                android:textSize="16sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/black"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -150,7 +186,8 @@
                 android:paddingLeft="5dp"
                 android:paddingEnd="5dp"
                 android:text="@string/contact"
-                android:textSize="20sp" />
+                android:textColor="@color/black"
+                android:textSize="18sp" />
 
             <TextView
                 android:tag="5"
@@ -161,8 +198,15 @@
                 android:paddingLeft="5dp"
                 android:paddingEnd="5dp"
                 android:text="@string/contact"
-                android:textColor="#000000"
-                android:textSize="22sp" />
+                android:textSize="16sp"
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/mdtp_dark_gray"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/black"/>
 
             <TextView
 
@@ -173,10 +217,10 @@
                 android:paddingLeft="5dp"
                 android:paddingEnd="5dp"
                 android:text="@string/blood_group"
-                android:textSize="20sp" />
+                android:textSize="18sp"
+                android:textColor="@color/black"/>
             <TextView
                 android:tag="6"
-                android:textColor="#000000"
                 android:id="@+id/emplyee_bloodgrp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -184,8 +228,14 @@
                 android:paddingLeft="5dp"
                 android:paddingEnd="5dp"
                 android:text="@string/blood_group"
-                android:textSize="22sp" />
-
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/mdtp_dark_gray"
+                android:textSize="16sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/black"/>
             <TextView
 
                 android:layout_width="match_parent"
@@ -195,19 +245,26 @@
                 android:paddingLeft="5dp"
                 android:paddingEnd="5dp"
                 android:text="@string/employee_salary"
-                android:textSize="20sp" />
+                android:textSize="18sp"
+                android:textColor="@color/black"/>
 
             <TextView
                 android:tag="7"
                 android:id="@+id/salary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#000000"
+                android:textColor="@color/mdtp_dark_gray"
                 android:paddingStart="5dp"
                 android:paddingLeft="5dp"
                 android:paddingEnd="5dp"
                 android:text="@string/employee_salary"
-                android:textSize="22sp" />
+                android:textSize="16sp"
+                android:layout_marginBottom="10dp"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/black"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

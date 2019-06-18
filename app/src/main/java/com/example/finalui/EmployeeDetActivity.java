@@ -44,19 +44,19 @@ public class EmployeeDetActivity extends AppCompatActivity{
 
         gettheData();
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(EmployeeDetActivity.this, EditActivity.class);
-                intent.putExtra("EID", emp_id.getText().toString().trim());
-                intent.putExtra("ENAME", ename.getText().toString().trim());
-                intent.putExtra("EADD", eadd.getText().toString().trim());
-                intent.putExtra("ECON", contact.getText().toString().trim());
-                intent.putExtra("EBLOOD", blood_group.getText().toString().trim());
-                intent.putExtra("DOB", dob.getText().toString().trim());
-                startActivityForResult(intent, REQUEST_CODE);
-            }
-        });
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(EmployeeDetActivity.this, EditActivity.class);
+//                intent.putExtra("EID", emp_id.getText().toString().trim());
+//                intent.putExtra("ENAME", ename.getText().toString().trim());
+//                intent.putExtra("EADD", eadd.getText().toString().trim());
+//                intent.putExtra("ECON", contact.getText().toString().trim());
+//                intent.putExtra("EBLOOD", blood_group.getText().toString().trim());
+//                intent.putExtra("DOB", dob.getText().toString().trim());
+//                startActivityForResult(intent, REQUEST_CODE);
+//            }
+//        });
 
 
         changepass.setOnClickListener(new View.OnClickListener() {

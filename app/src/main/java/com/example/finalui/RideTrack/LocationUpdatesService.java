@@ -12,6 +12,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Binder;
@@ -26,8 +28,11 @@ import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import com.example.finalui.ApplicationVariable;
 import com.example.finalui.HomeActivity;
 import com.example.finalui.R;
+import com.example.finalui.VvVolleyClass;
+import com.example.finalui.VvVolleyInterface;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -39,9 +44,22 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import static com.example.finalui.HomeActivity.cdd;
 import static com.example.finalui.HomeActivity.dist;
@@ -79,7 +97,7 @@ import static java.lang.StrictMath.abs;
  * continue. When the activity comes back to the foreground, the foreground service stops, and the
  * notification assocaited with that service is removed.
  */
-public class LocationUpdatesService extends Service {
+public class LocationUpdatesService extends Service implements VvVolleyInterface {
 
     private static final String PACKAGE_NAME =
             "com.google.android.gms.location.sample.locationupdatesforegroundservice";
@@ -90,7 +108,7 @@ public class LocationUpdatesService extends Service {
      * The name of the channel for notifications.
      */
     private static final String CHANNEL_ID = "channel_01";
-    SharedPreferences prefs;
+    public static SharedPreferences prefs;
     static final String ACTION_BROADCAST = PACKAGE_NAME + ".broadcast";
 
     static final String EXTRA_LOCATION = PACKAGE_NAME + ".location";
@@ -117,7 +135,7 @@ public class LocationUpdatesService extends Service {
     private static final int NOTIFICATION_ID = 12345678;
 
     private List<Double> ll;
-    private double pp=0.001;
+    public long idCounter = 0;
 
     /**
      * Used to check whether the bound activity has really gone away and not unbound as part of an
@@ -437,6 +455,9 @@ public class LocationUpdatesService extends Service {
                 edit.putString("lng1", String.valueOf(location.getLongitude()));
             edit.apply();
            // mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16 ));
+
+            sendTaskJson(location.getLatitude(),location.getLongitude(),"sunny",kk);
+
         } else {
             speed1.setText(jj + " kmph");
         }
@@ -482,6 +503,34 @@ public class LocationUpdatesService extends Service {
             mNotificationManager.notify(NOTIFICATION_ID, getNotification());
         }
     }
+
+    private void sendTaskJson(double lat,double lng, String weather,double speed) {
+        VvVolleyClass vvVolleyClass = new VvVolleyClass(this, getApplicationContext());
+        HashMap params = new HashMap<>();
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("latitude", lat);
+        jsonObject.addProperty("longitude", lng);
+        jsonObject.addProperty("weather", weather);
+        jsonObject.addProperty("speed", speed);
+        //for address
+        Geocoder geocoder = new Geocoder(getApplicationContext());
+        String address="";
+        try {
+            List<Address> addressList = geocoder.getFromLocation(lat,lng,1);
+            address= addressList.get(0).getAddressLine(0);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        jsonObject.addProperty("address", address);
+        params.put("phone", ApplicationVariable.ACCOUNT_DATA.contact);
+        params.put("token", ApplicationVariable.ACCOUNT_DATA.token);
+        params.put("regId", ApplicationVariable.ACCOUNT_DATA.reg_id);
+        params.put("filter", new ArrayList<>().toString());
+        params.put("new_data_row", jsonObject.toString());//sends the new_data_row array to the api
+        vvVolleyClass.makeRequest("http://admin.doorhopper.in/api/vdhp/team/ride/track/update", params);
+    }
+
     /**
      * Sets the location request parameters.
      */
@@ -492,6 +541,42 @@ public class LocationUpdatesService extends Service {
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     }
 
+    @Override
+    public void onTaskComplete(String result) {
+        Log.d("ride", result);
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = new JSONObject(result);
+           // JSONArray jsonArray = jsonObject.getJSONArray("id");
+            if(idCounter==0)
+               // saveId(jsonArray.getJSONObject(0).toString());
+                saveStartId(jsonObject.getString("id"));
+
+            saveAllIds(jsonObject.getString("id"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.d("ride", prefs.getString("rideId", null));
+        idCounter++;
+    }
+
+    private void saveAllIds(String id) {
+        prefs = getApplicationContext().getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor edit = prefs.edit();
+        edit.putString("AllIds", id);
+        edit.apply();
+    }
+
+    private void saveStartId(String startId) {
+        prefs = getApplicationContext().getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor edit = prefs.edit();
+        edit.putString("rideId", startId);
+        edit.putString("start_time",java.text.DateFormat.getTimeInstance().format(new Date()));
+        edit.apply();
+    }
+
+    //team/trip/update;
+    //team/trip/get;
     /**
      * Class used for the client Binder.  Since this service runs in the same process as its
      * clients, we don't need to deal with IPC.

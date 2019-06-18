@@ -67,6 +67,7 @@ public class HomeActivity extends AppCompatActivity
     ProgressBar progressBar;
     static int hong=0;
     static int kong=0;
+    public static HomeActivity fa2;
 
     //attendance/get  --- filter-jsonObject of todaydate
     public static int constant = 0, closed = 0;
@@ -93,6 +94,7 @@ public class HomeActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         Log.d("DSKE","ONCREAATE");
+        fa2 = this;
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("loading...");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -130,6 +132,8 @@ public class HomeActivity extends AppCompatActivity
             punchin.setVisibility(GONE);
             punchout.setVisibility(GONE);
         }
+
+        Log.d("create","pppp");
 
 
         emdet.setOnClickListener(new View.OnClickListener() {
@@ -247,6 +251,7 @@ public class HomeActivity extends AppCompatActivity
     //gagan
     @Override
     protected void onResume() {
+        Log.d("resume","ppp");
         openOrClose = true;
         if (vv == 6) {
             resume.setVisibility(View.VISIBLE);

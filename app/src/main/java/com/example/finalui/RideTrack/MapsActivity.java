@@ -52,6 +52,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static com.example.finalui.HomeActivity.dist;
@@ -60,6 +61,7 @@ import static com.example.finalui.HomeActivity.pause1;
 import static com.example.finalui.HomeActivity.resume;
 import static com.example.finalui.HomeActivity.start1;
 import static com.example.finalui.HomeActivity.vv;
+import static com.example.finalui.RideTrack.LocationUpdatesService.prefs;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener {
 
@@ -320,9 +322,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Intent intent = new Intent(MapsActivity.this, Details.class);
                 intent.putExtra("dist", temp);
                 intent.putExtra("duration", chronometer.getText());
+                intent.putExtra("start_id", prefs.getString("rideId",null));
+                intent.putExtra("end_id",prefs.getString("AllIds", null));
+                intent.putExtra("start_time",prefs.getString("start_time", null));
+                intent.putExtra("end_time",java.text.DateFormat.getTimeInstance().format(new Date()));
                 startActivity(intent);
                 finish();
-
                 return false;
             });
 
@@ -336,8 +341,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     Context.BIND_AUTO_CREATE);
 
         }
-
-        @Override
+    @Override
         protected void onResume() {
             super.onResume();
 

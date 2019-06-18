@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+//team/ride/track/update
+//team/ride/track/get
+//lat,long,weather,speed,address
 public class EditActivity extends AppCompatActivity {
     private EditText editID,editName,editAdd,editCOn,editblood,editDOB;
     private Button savebutton;

@@ -37,9 +37,6 @@
         <activity
             android:name=".RideTrack.MapsActivity2"
             android:label="@string/title_activity_maps2"></activity>
-        <activity android:name=".RideTrack.RideCompleteDetailsActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
         <activity android:name=".SalaryDetailsActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>

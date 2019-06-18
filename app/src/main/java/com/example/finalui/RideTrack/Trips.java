@@ -12,40 +12,48 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.finalui.Activities.TaskActivity;
+import com.example.finalui.ApplicationVariable;
 import com.example.finalui.HomeActivity;
+import com.example.finalui.Models.UpdateModel;
 import com.example.finalui.R;
+import com.example.finalui.VvVolleyClass;
+import com.example.finalui.VvVolleyInterface;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-public class Trips extends Activity implements NotesAdapter.OnItemClickListener{
+public class Trips extends Activity implements NotesAdapter.OnItemClickListener, VvVolleyInterface {
 
     RecyclerView recyclerView;
     NotesAdapter mAdapter;
-    List<TripData> tripData;
-    DatabaseHelper db;
+    List<TripData> tripDataList;
     Button button;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trips);
         recyclerView = findViewById(R.id.recy);
-        tripData=new ArrayList<>();
-       // button=findViewById(R.id.startend);
+        tripDataList = new ArrayList<>();
 
-        db = new DatabaseHelper(Trips.this);
 
-        tripData=db.getTripData();
-        mAdapter = new NotesAdapter(getApplicationContext(), tripData);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        //for the divider
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
-                ((LinearLayoutManager) layoutManager).getOrientation());
-        recyclerView.addItemDecoration(dividerItemDecoration);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(mAdapter);
-        mAdapter.setOnItemClickListener(Trips.this);
+        getTripFromAPI();//getting the trips from server
+
+    }
+
+    private void getTripFromAPI() {
+        VvVolleyClass vvVolleyClass = new VvVolleyClass(this, getApplicationContext());
+        HashMap params = new HashMap<>();
+        params.put("phone", ApplicationVariable.ACCOUNT_DATA.contact);
+        params.put("token", ApplicationVariable.ACCOUNT_DATA.token);
+        params.put("regId", ApplicationVariable.ACCOUNT_DATA.reg_id);
+        params.put("filter", new JSONObject().toString());
+        vvVolleyClass.makeRequest("http://admin.doorhopper.in/api/vdhp/team/trip/get", params);
     }
 
     @Override
@@ -57,16 +65,44 @@ public class Trips extends Activity implements NotesAdapter.OnItemClickListener{
 
     @Override
     public void onItemClick(int position) {
-        //set korisu
+
     }
 
     @Override
     public void onUpdateClick(int position) {
-        Intent intent = new Intent(Trips.this,MapsActivity2.class);
-        TripData tripobj = tripData.get(position);
-        String name = tripobj.getName().trim();
-        Log.d("AAA",name);
-        intent.putExtra("NAME",name);
+        Intent intent = new Intent(Trips.this, MapsActivity2.class);
+        intent.putExtra("tripData", tripDataList.get(position));
         startActivity(intent);
+        Log.d("DHU", tripDataList.get(position).toString());
+    }
+
+    @Override
+    public void onTaskComplete(String result) {
+        Log.d("trips", result);
+
+        try {
+            JSONObject o = new JSONObject(result);
+            JSONArray a = o.getJSONArray("data_rows");
+            for (int i = 0; i < a.length(); ++i) {//for accessing the json array "data_rows"
+
+                    //Log.d("task",a.getJSONObject(i).isNull("people")?"N/A":a.getJSONObject(i).getString("people"));//to check if element named "people" is there in the data_rows array or not.
+
+                    TripData tripData = new TripData(a.getJSONObject(i).getString("id"), a.getJSONObject(i).getString("trip_name"),
+                            Float.parseFloat(a.getJSONObject(i).getString("distance")), a.getJSONObject(i).getString("duration"));
+                    tripDataList.add(tripData);
+            }
+            mAdapter = new NotesAdapter(getApplicationContext(), tripDataList);
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+            //for the divider
+            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
+                    ((LinearLayoutManager) layoutManager).getOrientation());
+            recyclerView.addItemDecoration(dividerItemDecoration);
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
+            recyclerView.setLayoutManager(layoutManager);
+            recyclerView.setAdapter(mAdapter);
+            mAdapter.setOnItemClickListener(Trips.this);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
