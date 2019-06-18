@@ -29,6 +29,10 @@
         android:id="@+id/scrollableview"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+    <androidx.cardview.widget.CardView
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
 
@@ -205,6 +209,8 @@
                 android:text="@string/employee_salary"
                 android:textSize="22sp" />
         </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
     </ScrollView>
 
 </LinearLayout>

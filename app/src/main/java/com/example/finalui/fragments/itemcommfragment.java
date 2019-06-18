@@ -67,10 +67,8 @@ public class itemcommfragment extends Fragment implements VvVolleyInterface {
                 check();
             }
         });
-
         return view;
     }
-
     private void check() {
         if(TextUtils.isEmpty(comment.getText().toString().trim()))
         {
