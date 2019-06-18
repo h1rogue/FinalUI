@@ -41,6 +41,12 @@ public class VvVolleyClass {
         this.resultInterface = (VvVolleyInterface) activityContext;
     }
 
+
+    public VvVolleyClass(Context context,VvVolleyInterface vvVolleyInterface){
+        this.activityContext = context;
+        this.resultInterface = vvVolleyInterface;
+    }
+
     public VvVolleyClass(Fragment f, Context c1, Context c2){
         activityContext = c1;
         //applicationContext = c2;

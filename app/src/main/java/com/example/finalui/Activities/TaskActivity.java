@@ -221,7 +221,7 @@ public class TaskActivity extends AppCompatActivity implements MyAdapter.OnItemC
                             a.getJSONObject(i).getString("vendor"), a.getJSONObject(i).getString("current_department"),
                             a.getJSONObject(i).getString("next_date"), a.getJSONObject(i).getString("current_employee"),
                             a.getJSONObject(i).getString("slip_date"));
-                    tasksModels.add(tasksModel1);//for changing the upper part of fragments
+
 
                     Tasks tasks1;
                     tasks1 = new Tasks(a.getJSONObject(i).getString("slip_date"),
@@ -234,7 +234,7 @@ public class TaskActivity extends AppCompatActivity implements MyAdapter.OnItemC
                             a.getJSONObject(i).isNull("action_time") ? "N/A" : a.getJSONObject(i).getString("action_time"),
                             a.getJSONObject(i).isNull("duration") ? "N/A" : a.getJSONObject(i).getString("duration"),
                             a.getJSONObject(i).getString("current_status"),
-                            updateModelList, puchaseModelList, commentModelList, tasksModels);
+                            updateModelList, puchaseModelList, commentModelList, tasksModel1);
                     tasks.add(tasks1);
 
                     offsettext.setText(offset+" to "+(offset+limit)+" of "+data_row_size);
@@ -309,8 +309,7 @@ public class TaskActivity extends AppCompatActivity implements MyAdapter.OnItemC
         createIndividualCommentLists(tasks1.getCommentModelList(),slip);
         bundle2.putSerializable("ARRAYLIST2",(Serializable)commentModelListforIndividual);
         intent.putExtra("BUNDLE2",bundle2);
-
-        intent.putExtra("INFO",tasksModels.get(position));//send each object<Taskmodel> of the list to the next activity
+        intent.putExtra("INFO",tasks1.getTasksModel());//send each object<Taskmodel> of the list to the next activity
         startActivity(intent);
     }
 

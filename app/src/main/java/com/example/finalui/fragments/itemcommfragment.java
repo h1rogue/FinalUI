@@ -3,6 +3,7 @@ package com.example.finalui.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,8 +25,10 @@ import com.example.finalui.Models.CommentModel;
 import com.example.finalui.R;
 import com.example.finalui.TasksModel;
 import com.example.finalui.VvVolleyClass;
+import com.example.finalui.VvVolleyInterface;
 import com.google.gson.JsonObject;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -34,7 +37,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
-public class itemcommfragment extends Fragment {
+public class itemcommfragment extends Fragment implements VvVolleyInterface {
 
     View view;
     RecyclerView recyclerView2;
@@ -43,24 +46,18 @@ public class itemcommfragment extends Fragment {
     Button button;
     List<CommentModel> commentModelList;
     String slip_no;
-
     public itemcommfragment(){}
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.item_comment,container,false);
         Intent intent = getActivity().getIntent();
         Bundle args = intent.getBundleExtra("BUNDLE2");
-        commentModelList=new ArrayList<>();
-
-
         Intent intent2 = getActivity().getIntent();
         TasksModel tasksModel = (TasksModel) intent2.getSerializableExtra("INFO");
         slip_no=  tasksModel.getSlip_no();
+        getCommentRefreshed();
 
-        ArrayList<CommentModel> object = (ArrayList<CommentModel>) args.getSerializable("ARRAYLIST2");
-        commentModelList=object;
         recyclerView2=view.findViewById(R.id.recyclerview2);
         comment=view.findViewById(R.id.editText3);
         button=view.findViewById(R.id.button4);
@@ -71,8 +68,6 @@ public class itemcommfragment extends Fragment {
             }
         });
 
-        myAdapter4=new MyAdapter4(getContext(), commentModelList);
-        recyclerView2.setAdapter(myAdapter4);
         return view;
     }
 
@@ -84,24 +79,66 @@ public class itemcommfragment extends Fragment {
         else
         {
             String commentxt = comment.getText().toString().trim();
-            sendtheComment();
-            comment.setText("");
+            sendtheComment(commentxt);
+
         }
     }
-
-    private void sendtheComment() {
-        getCommentsfromJson();
-    }
-
-    private void getCommentsfromJson() {
-        VvVolleyClass vvVolleyClass = new VvVolleyClass(getActivity(),getActivity().getApplicationContext());
+    private void sendtheComment(String commentxt) {
+        VvVolleyClass vvVolleyClass = new VvVolleyClass(getContext(),this);
         HashMap params = new HashMap<>();
         params.put("phone", ApplicationVariable.ACCOUNT_DATA.contact);
         params.put("token", ApplicationVariable.ACCOUNT_DATA.token);
         params.put("regId", ApplicationVariable.ACCOUNT_DATA.reg_id);
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("slip_no",slip_no);
-        params.put("filter", jsonObject);
+        jsonObject.addProperty("comment",commentxt);
+        params.put("new_data_row", jsonObject.toString());
+        vvVolleyClass.makeRequest("http://admin.doorhopper.in/api/vdhp/order/slip/comment/create", params);
+    }
+
+    @Override
+    public void onTaskComplete(String result) {
+        try {
+            JSONObject jsonObject = new JSONObject(result);
+            Log.d("DSK_OPER", "onTaskComplete:"+result);
+            if(jsonObject.getString("responseFor").equals( "order/slip/comment/create")){
+                comment.setText("");
+                getCommentRefreshed();
+            }
+
+            if(jsonObject.getString("responseFor").equals( "order/slip/comment/get")){
+
+               if(jsonObject.getInt("data_rows_size")>0){
+                   JSONArray jarray = jsonObject.getJSONArray("data_rows");
+                   for(int i=0;i<jarray.length();i++){
+                       CommentModel commentModel = new CommentModel(jarray.getJSONObject(i).getString("staff"),
+                               jarray.getJSONObject(i).getString("comment"),
+                               jarray.getJSONObject(i).getString("commented_on"),
+                               jarray.getJSONObject(i).getString("slip_no"),
+                               jarray.getJSONObject(i).getString("id"));
+                       commentModelList.add(commentModel);
+                       Log.d("TAGDER", "onTaskComplete: "+commentModelList.get(i).getcomment());
+                   }
+                   myAdapter4=new MyAdapter4(getContext(), commentModelList);
+                   recyclerView2.setAdapter(myAdapter4);
+               }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void getCommentRefreshed() {
+        commentModelList=new ArrayList<>();
+
+        VvVolleyClass vvVolleyClass = new VvVolleyClass(getContext(),this);
+        HashMap params = new HashMap<>();
+        params.put("phone", ApplicationVariable.ACCOUNT_DATA.contact);
+        params.put("token", ApplicationVariable.ACCOUNT_DATA.token);
+        params.put("regId", ApplicationVariable.ACCOUNT_DATA.reg_id);
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("slip_no",slip_no);
+        params.put("filter", jsonObject.toString());
         vvVolleyClass.makeRequest("http://admin.doorhopper.in/api/vdhp/order/slip/comment/get", params);
     }
 }

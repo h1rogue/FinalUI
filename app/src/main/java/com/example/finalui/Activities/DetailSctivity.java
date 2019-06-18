@@ -40,8 +40,6 @@ public class DetailSctivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_sctivity);
         getSupportActionBar().setTitle("Tasks Details");
-//    toolbar = findViewById(R.id.toolbary);
-//    setSupportActionBar(toolbar);
 
         slip_no = findViewById(R.id.textView17);
         customer_name = findViewById(R.id.textView25);
