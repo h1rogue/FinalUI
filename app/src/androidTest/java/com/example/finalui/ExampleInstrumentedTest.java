@@ -1,4 +1,4 @@
-package com.example.finalui;
+package com.deskneed.team;
 
 import android.content.Context;
 import androidx.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.finalui", appContext.getPackageName());
+        assertEquals("com.deskneed.team", appContext.getPackageName());
     }
 }

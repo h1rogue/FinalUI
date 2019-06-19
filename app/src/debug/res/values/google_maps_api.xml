@@ -4,7 +4,7 @@
 
     To get one, follow this link, follow the directions and press "Create" at the end:
 
-    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=0D:E8:A8:4C:10:D1:A0:A6:93:6F:A9:45:77:7E:B7:97:E2:2A:40:F7%3Bcom.example.finalui.RideTrack
+    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=0D:E8:A8:4C:10:D1:A0:A6:93:6F:A9:45:77:7E:B7:97:E2:2A:40:F7%3Bcom.deskneed.team.RideTrack
 
     You can also add your credentials to an existing key, using these values:
 

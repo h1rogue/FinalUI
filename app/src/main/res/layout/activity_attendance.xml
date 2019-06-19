@@ -18,13 +18,13 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <com.example.finalui.VvCalendarView
+            <com.deskneed.team.VvCalendarView
                 android:layout_margin="5dp"
                 android:id="@+id/calendervv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-            </com.example.finalui.VvCalendarView>
+            </com.deskneed.team.VvCalendarView>
 
           <View
               android:layout_marginTop="12dp"
