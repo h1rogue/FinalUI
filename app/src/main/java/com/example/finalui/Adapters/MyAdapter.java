@@ -1,6 +1,7 @@
 package com.example.finalui.Adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,6 +60,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         holder.timeofwork.setText(taskobj.getTime_work());
         holder.duration.setText(taskobj.getTask_duration());
         holder.status.setText(taskobj.getStatus());
+        Log.d("status11", taskobj.getStatus());
     }
 
     @Override

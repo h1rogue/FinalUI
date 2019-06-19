@@ -2,6 +2,7 @@ package com.example.finalui.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -74,7 +75,8 @@ public class DetailSctivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.tabviewlay);
         tabLayout.setupWithViewPager(viewPager);
         Intent intent1 = getIntent();
-        int val = (int) intent1.getIntExtra("pos",0);
+        int val = (int) intent1.getIntExtra("pos",0);//if update button of prev activity is clicked (i.e onItemClick is executed the pos is saved as 1 so direct update fragment is intented)
+        Log.d("stttt", intent1.getStringExtra("status1")+"");
         viewPager.setCurrentItem(val);
 
     }

@@ -2,6 +2,7 @@ package com.example.finalui.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,7 @@ public class itemupdatefragment extends Fragment {
     RecyclerView recyclerView;
     MyAdapter2 myAdapter2;
     List<UpdateModel> objectlist;
+    String slipno,date,status;
 
     @Nullable
     @Override
@@ -39,6 +41,11 @@ public class itemupdatefragment extends Fragment {
         view = inflater.inflate(R.layout.item_updates,container,false);
         button = view.findViewById(R.id.floatbutton);
         Intent intent = getActivity().getIntent();
+        slipno = intent.getStringExtra("slipno");
+        date = intent.getStringExtra("date");
+        status = intent.getStringExtra("status");
+        Log.d("slippp", slipno+date+"");
+
         Bundle args = intent.getBundleExtra("BUNDLE");
         objectlist  = new ArrayList<>();
         ArrayList<UpdateModel> objectlistfromintent = (ArrayList<UpdateModel>) args.getSerializable("ARRAYLIST");
@@ -50,6 +57,9 @@ public class itemupdatefragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent1 = new Intent(getContext(), AddUpdateActivity.class);
+                intent1.putExtra("slip_no", slipno);
+                intent1.putExtra("date", date);
+                intent1.putExtra("status", status);
                 startActivityForResult(intent1,123);
             }
         });

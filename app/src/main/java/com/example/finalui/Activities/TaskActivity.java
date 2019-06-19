@@ -309,7 +309,7 @@ public class TaskActivity extends AppCompatActivity implements MyAdapter.OnItemC
 
 
     @Override
-    public void onItemClick(int position) {
+    public void onItemClick(int position) {//update button clicked
 
         Intent intent = new Intent(this,DetailSctivity.class);
         Bundle bundle = new Bundle();
@@ -323,6 +323,14 @@ public class TaskActivity extends AppCompatActivity implements MyAdapter.OnItemC
         intent.putExtra("BUNDLE",bundle);
         intent.putExtra("pos",1);
         intent.putExtra("INFO",tasks1.getTasksModel());
+        intent.putExtra("slipno",slip);//slip_no sent for floating action button
+        intent.putExtra("date",tasks.get(position).getTaskdate());
+        intent.putExtra("status",tasks.get(position).getStatus());
+
+        Log.d("slipp",tasks.get(position).getStatus()+tasks.get(position).getTaskdate()
+    +slip+"");
+
+
         Bundle bundle1=new Bundle();//for sending the whole list to another activity
         bundle1.putSerializable("ARRAYLIST1",(Serializable)purchaseModelListforIndividual);
         intent.putExtra("BUNDLE1",bundle1);
