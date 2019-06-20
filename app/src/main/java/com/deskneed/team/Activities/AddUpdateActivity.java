@@ -66,8 +66,6 @@ public class AddUpdateActivity extends AppCompatActivity implements VvVolleyInte
         updatedate.setText(i.getStringExtra("date"));//problem
         String presentStatus = i.getStringExtra("status").toUpperCase();
 
-
-
         Spinner spinner = (Spinner)findViewById(R.id.spinStatus);
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, android.R.id.text1);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
