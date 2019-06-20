@@ -11,6 +11,7 @@ public class ApplicationVariable extends Application {
         public static String city;
         public static String name;
         public static String emp_id;
+        public static int id;
         public static String dob;
         public static String address;
         public static String contact;

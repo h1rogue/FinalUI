@@ -8,15 +8,15 @@
     tools:context=".AttendanceActivity"
     android:id="@+id/linearlay45">
 
-    <androidx.cardview.widget.CardView
-        android:layout_margin="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:cardCornerRadius="8dp">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+    <!--<androidx.cardview.widget.CardView-->
+        <!--android:layout_margin="8dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--app:cardCornerRadius="8dp">-->
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:orientation="vertical">-->
 
             <com.deskneed.team.VvCalendarView
                 android:layout_margin="5dp"
@@ -69,161 +69,176 @@
                     android:visibility="gone" />
             </LinearLayout>
 
-            <LinearLayout
-                android:padding="5dp"
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:gravity="center"
-                    android:layout_weight="0.1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="15sp"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:text="Time In : "/>
-                <TextView
-                    android:layout_weight="0.9"
-                    android:id="@+id/timeIn"
-                    android:text="Timein"
-                    android:gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    android:textSize="15sp" />
-            </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:orientation="vertical">
+
+           <LinearLayout
+               android:padding="5dp"
+               android:layout_marginTop="10dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal">
+               <TextView
+                   android:gravity="center"
+                   android:layout_weight="0.1"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textSize="15sp"
+                   android:textColor="@color/black"
+                   android:textStyle="bold"
+                   android:text="Time In : "/>
+               <TextView
+                   android:layout_weight="0.9"
+                   android:id="@+id/timeIn"
+                   android:text="Timein"
+                   android:gravity="center"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginEnd="5dp"
+                   android:textSize="15sp" />
+           </LinearLayout>
 
 
-            <LinearLayout
-                android:padding="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:gravity="center"
-                    android:layout_weight="0.1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="15sp"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:text="Time Out : "/>
-                <TextView
-                    android:layout_weight="0.9"
-                    android:id="@+id/timeOut"
-                    android:text="TimeOUT"
-                    android:gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    android:textSize="15sp" />
-            </LinearLayout>
+           <LinearLayout
+               android:padding="5dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal">
+               <TextView
+                   android:gravity="center"
+                   android:layout_weight="0.1"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textSize="15sp"
+                   android:textColor="@color/black"
+                   android:textStyle="bold"
+                   android:text="Time Out : "/>
+               <TextView
+                   android:layout_weight="0.9"
+                   android:id="@+id/timeOut"
+                   android:text="TimeOUT"
+                   android:gravity="center"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginEnd="5dp"
+                   android:textSize="15sp" />
+           </LinearLayout>
 
-            <LinearLayout
-                android:padding="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:gravity="center"
-                    android:layout_weight="0.05"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="15sp"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:text="Lat In : "/>
-                <TextView
-                    android:layout_weight="0.95"
-                    android:id="@+id/timelatitudeIN"
-                    android:text="Lat IN"
-                    android:gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    android:textSize="15sp" />
-            </LinearLayout>
+           <LinearLayout
+               android:padding="5dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal">
+               <TextView
+                   android:gravity="center"
+                   android:layout_weight="0.05"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textSize="15sp"
+                   android:textColor="@color/black"
+                   android:textStyle="bold"
+                   android:text="Lat In : "/>
+               <TextView
+                   android:layout_weight="0.95"
+                   android:id="@+id/timelatitudeIN"
+                   android:text="Lat IN"
+                   android:gravity="center"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginEnd="5dp"
+                   android:textSize="15sp" />
+           </LinearLayout>
 
-            <LinearLayout
-                android:padding="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:gravity="center"
-                    android:layout_weight="0.05"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="15sp"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:text="Long In : "/>
-                <TextView
-                    android:layout_weight="0.95"
-                    android:id="@+id/timelongitudeIN"
-                    android:text="Long IN"
-                    android:gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    android:textSize="15sp" />
-            </LinearLayout>
+           <LinearLayout
+               android:padding="5dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal">
+               <TextView
+                   android:gravity="center"
+                   android:layout_weight="0.05"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textSize="15sp"
+                   android:textColor="@color/black"
+                   android:textStyle="bold"
+                   android:text="Long In : "/>
+               <TextView
+                   android:layout_weight="0.95"
+                   android:id="@+id/timelongitudeIN"
+                   android:text="Long IN"
+                   android:gravity="center"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginEnd="5dp"
+                   android:textSize="15sp" />
+           </LinearLayout>
 
-            <LinearLayout
-                android:padding="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:gravity="center"
-                    android:layout_weight="0.05"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="15sp"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:text="Lat Out : "/>
-                <TextView
-                    android:layout_weight="0.95"
-                    android:id="@+id/timelatitudeout"
-                    android:text="Lat Out"
-                    android:gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    android:textSize="15sp" />
-            </LinearLayout>
+           <LinearLayout
+               android:padding="5dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal">
+               <TextView
+                   android:gravity="center"
+                   android:layout_weight="0.05"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textSize="15sp"
+                   android:textColor="@color/black"
+                   android:textStyle="bold"
+                   android:text="Lat Out : "/>
+               <TextView
+                   android:layout_weight="0.95"
+                   android:id="@+id/timelatitudeout"
+                   android:text="Lat Out"
+                   android:gravity="center"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginEnd="5dp"
+                   android:textSize="15sp" />
+           </LinearLayout>
 
-            <LinearLayout
-                android:padding="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:gravity="center"
-                    android:layout_weight="0.05"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="15sp"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:text="Long Out : "/>
-                <TextView
-                    android:layout_weight="0.95"
-                    android:id="@+id/timelongitudeout"
-                    android:text="Long Out"
-                    android:gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    android:textSize="15sp" />
-            </LinearLayout>
+           <LinearLayout
+
+               android:layout_marginBottom="5dp"
+               android:padding="5dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal">
+               <TextView
+                   android:gravity="center"
+                   android:layout_weight="0.05"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textSize="15sp"
+                   android:textColor="@color/black"
+                   android:textStyle="bold"
+                   android:text="Long Out : "/>
+               <TextView
+                   android:layout_weight="0.95"
+                   android:id="@+id/timelongitudeout"
+                   android:text="Long Out"
+                   android:gravity="center"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textSize="15sp" />
+           </LinearLayout>
+
+       </LinearLayout>
+
+    </ScrollView>
+
 
 
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    <!--</androidx.cardview.widget.CardView>-->
 
 
-</LinearLayout>
+<!--</LinearLayout>-->

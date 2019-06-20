@@ -1,5 +1,6 @@
 package com.deskneed.team;
 
+import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -110,6 +111,7 @@ public class LoginActivity extends AppCompatActivity implements VvVolleyInterfac
             } else if (jsonObject.getString("responseFor").equals("userDetails")) {
                 ApplicationVariable.ACCOUNT_DATA.emp_id = jsonObject.getString("emp_id");
                 ApplicationVariable.ACCOUNT_DATA.name = jsonObject.getString("name");
+                ApplicationVariable.ACCOUNT_DATA.id = jsonObject.getInt("id");
                 ApplicationVariable.ACCOUNT_DATA.dob = jsonObject.getString("dob");
                 ApplicationVariable.ACCOUNT_DATA.address = jsonObject.getString("address");
                 ApplicationVariable.ACCOUNT_DATA.contact = jsonObject.getString("phone");

@@ -9,10 +9,9 @@
         android:id="@+id/cardView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="8dp"
-        android:padding="5dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginEnd="3dp"
+        android:padding="2dp"
         app:cardCornerRadius="5dp"
         app:cardElevation="5dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="5dp"
                 android:text="#1234"
                 android:textColor="#000000"
                 android:textSize="18sp"
@@ -39,7 +38,7 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="10dp"
                 android:text="12/02/2019"
                 android:textColor="#000000"
@@ -52,10 +51,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="5dp"
                 android:text="Customer Name"
                 android:textColor="#000000"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -64,10 +63,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="3dp"
                 android:text="Requirement:"
                 android:textColor="#000000"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -76,10 +75,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="3dp"
                 android:text="People:"
                 android:textColor="#000000"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
@@ -87,7 +86,7 @@
                 android:id="@+id/view"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="2dp"
                 android:background="#c0c0c0"
                 android:textColor="#000000"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -99,10 +98,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="7dp"
+                android:layout_marginTop="3dp"
                 android:layout_marginEnd="8dp"
                 android:text="Dummy requirement"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 app:layout_constrainedWidth="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.089"
@@ -114,9 +113,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="3dp"
-                android:layout_marginTop="7dp"
+                android:layout_marginTop="3dp"
                 android:text="Vaibhav, Gagan, Hirak"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 app:layout_constrainedWidth="true"
                 app:layout_constraintStart_toEndOf="@+id/textView5"
                 app:layout_constraintTop_toBottomOf="@+id/textView6" />
@@ -126,9 +125,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="2dp"
                 android:text="Task: QUOTE"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view" />
 
@@ -136,7 +135,7 @@
                 android:id="@+id/textView11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="8dp"
                 android:text="Assigned at: 23/02/2019"
                 android:textSize="17sp"
@@ -148,10 +147,10 @@
                 android:id="@+id/textView13"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="3dp"
                 android:layout_marginEnd="8dp"
                 android:text="Action Time: 2/03/2019"
-                android:textSize="17sp"
+                android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
@@ -160,9 +159,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="3dp"
                 android:text="Duration: 45 days"
-                android:textSize="17sp"
+                android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
@@ -171,9 +170,8 @@
                 android:layout_width="379dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="3dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginBottom="10dp"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -187,6 +185,8 @@
                     android:layout_weight="1.5"
                     android:gravity="center"
                     android:text="STATUS:"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
                     android:textAllCaps="true" />
 
 
@@ -197,6 +197,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="Update"
+                    android:layout_marginEnd="2dp"
                     android:textColor="#000000" />
 
 

@@ -58,9 +58,7 @@ public class AddUpdateActivity extends AppCompatActivity implements VvVolleyInte
         deptArray = new ArrayList<>();
         empModelsArray = new ArrayList<>();
         deptIDmap = new HashMap<>();
-
         getDeptandEmployee();
-
         Intent i = getIntent();
         slipno.setText(i.getStringExtra("slip_no"));//problem
         updatedate.setText(i.getStringExtra("date"));//problem

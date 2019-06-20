@@ -49,7 +49,8 @@ public class TaskActivity extends AppCompatActivity implements MyAdapter.OnItemC
     Spinner spinner,spinner2;
     SearchView searchView;
     TextView offsettext;
-    Button activebutt,archievebutt,offsetsetbutt,offsetbeforebutt;
+    Button activebutt,archievebutt;
+    ImageButton offsetsetbutt,offsetbeforebutt;
     ImageButton reloadbutton;
     public static List<Tasks> tasks;
     List<UpdateModel> updateModelList;
@@ -191,9 +192,10 @@ public class TaskActivity extends AppCompatActivity implements MyAdapter.OnItemC
 
             if(o.getString("responseFor").equals("order/slip/comment/get")){
                 for(int i=0;i<a.length();i++){
-                    CommentModel commentModel  = new CommentModel(a.getJSONObject(i).getString("staff"),
+                    CommentModel commentModel  = new CommentModel(a.getJSONObject(i).getString("staff_name"),
                             a.getJSONObject(i).getString("comment"),a.getJSONObject(i).getString("commented_on"),
-                            a.getJSONObject(i).getString("slip_no"),a.getJSONObject(i).getString("id"));
+                            a.getJSONObject(i).getString("slip_no"),a.getJSONObject(i).getString("id"),
+                            a.getJSONObject(i).getInt("staff"));
                     commentModelList.add(commentModel);
                 }
             }
@@ -215,10 +217,10 @@ public class TaskActivity extends AppCompatActivity implements MyAdapter.OnItemC
                     Tasks tasks1;
                     tasks1 = new Tasks(a.getJSONObject(i).getString("slip_date"),
                             a.getJSONObject(i).getString("slip_no"),
-                            a.getJSONObject(i).getString("customer"),
+                            a.getJSONObject(i).getString("customer_name"),
                             a.getJSONObject(i).getString("requirement"),
                             a.getJSONObject(i).isNull("people") ? "N/A" : a.getJSONObject(i).getString("people"),
-                            a.getJSONObject(i).isNull("task") ? "N/A" : a.getJSONObject(i).getString("task"),
+                            a.getJSONObject(i).isNull("task") ? a.getJSONObject(i).getString("current_status") : a.getJSONObject(i).getString("task"),
                             a.getJSONObject(i).isNull("task_assigned") ? "N/A" : a.getJSONObject(i).getString("task_assigned"),
                             a.getJSONObject(i).isNull("action_time") ? "N/A" : a.getJSONObject(i).getString("action_time"),
                             a.getJSONObject(i).isNull("duration") ? "N/A" : a.getJSONObject(i).getString("duration"),

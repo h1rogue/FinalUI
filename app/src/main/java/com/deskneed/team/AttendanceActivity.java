@@ -308,15 +308,11 @@ public class AttendanceActivity extends AppCompatActivity implements VvVolleyInt
                 String date = jsonArray.getJSONObject(i).getString("date");
                 Log.d("jsondate", "jsondate" + date);
 
-//                hasmapofdates.put(date, new EachDateDetail(timeIn, timeOut,
-//                        jsonArray.getJSONObject(i).getString("lat_in"),
-//                        jsonArray.getJSONObject(i).getString("long_in"),
-//                        jsonArray.getJSONObject(i).getString("lat_out"),
-//                        jsonArray.getJSONObject(i).getString("log_out")));
+
 
                 Log.d("DSK_OPER", date);
                 if (!timeIn.equals("null") && timeOut.equals("null")) {
-                    Toast.makeText(this, "PunchOut Not Done", Toast.LENGTH_LONG).show();
+            //        Toast.makeText(this, "PunchOut Not Done", Toast.LENGTH_LONG).show();
                     try {
                         eventList.add(
                                 new ObjectAttendance(new SimpleDateFormat("yyyy-MM-dd").parse(date),
@@ -330,7 +326,7 @@ public class AttendanceActivity extends AppCompatActivity implements VvVolleyInt
                     }
 
                 } else if (!timeIn.equals("null") && !timeOut.equals("null")) {
-                    Toast.makeText(this, "Both PunchIn PunchOut Done", Toast.LENGTH_LONG).show();
+               //     Toast.makeText(this, "Both PunchIn PunchOut Done", Toast.LENGTH_LONG).show();
                     try {
                         eventList.add(new ObjectAttendance(new SimpleDateFormat("yyyy-MM-dd").parse(date), true, true,
                                 timeIn, timeOut, jsonArray.getJSONObject(i).getString("lat_in"),

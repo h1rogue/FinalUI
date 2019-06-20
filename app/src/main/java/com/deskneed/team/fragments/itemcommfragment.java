@@ -104,11 +104,12 @@ public class itemcommfragment extends Fragment implements VvVolleyInterface {
                if(jsonObject.getInt("data_rows_size")>0){
                    JSONArray jarray = jsonObject.getJSONArray("data_rows");
                    for(int i=0;i<jarray.length();i++){
-                       CommentModel commentModel = new CommentModel(jarray.getJSONObject(i).getString("staff"),
+                       CommentModel commentModel = new CommentModel(jarray.getJSONObject(i).getString("staff_name"),
                                jarray.getJSONObject(i).getString("comment"),
                                jarray.getJSONObject(i).getString("commented_on"),
                                jarray.getJSONObject(i).getString("slip_no"),
-                               jarray.getJSONObject(i).getString("id"));
+                               jarray.getJSONObject(i).getString("id"),
+                               jarray.getJSONObject(i).getInt("staff"));
                        commentModelList.add(commentModel);
                        Log.d("TAGDER", "onTaskComplete: "+commentModelList.get(i).getcomment());
                    }
